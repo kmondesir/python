@@ -23,29 +23,6 @@ class winnings:
       return True
     else:
       return False
-
-  @property
-  def secondOdd(self):
-    if self.draw_numbers[1] % 2 != 0:
-      return True
-    else:
-      return False
-  
-  @property
-  def ThirdOdd(self):
-    if self.draw_numbers[2] % 2 != 0:
-      return True
-    else:
-      return False
-
-  def positionOdd(self, position = 0):
-    try:
-      if self.draw_numbers[position] % 2 != 0:
-        return True
-      else:
-        return False
-    except ValueError:
-      pass
   
   @property
   def lastOdd(self):
