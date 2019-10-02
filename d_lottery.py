@@ -1,5 +1,6 @@
 from datetime import datetime as dt
 import random as rand
+import statistics as stat
 class winnings:
   """
   https://stackoverflow.com/questions/12906402/type-object-datetime-datetime-has-no-attribute-datetime
@@ -103,6 +104,18 @@ class winnings:
     for number in self.draw_numbers:
       total = total + number
     return total
+  
+  @property
+  def average(self):
+    return stat.mean(self.draw_number)
+  
+  @property
+  def variance(self):
+    return stat.variance(self.draw_number)
+  
+  @property
+  def standard_deviation(self):
+    return stat.stdev(self.draw_number)
 
   @staticmethod
   def generateRandomNumber(numbers=6,start=1,stop=59):
