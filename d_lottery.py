@@ -99,11 +99,8 @@ class winnings:
     return self.draw_numbers[-1]
   
   @property
-  def sum(self):
-    total = 0
-    for number in self.draw_numbers:
-      total = total + number
-    return total
+  def total(self):
+    return sum(self.draw_numbers)
   
   @property
   def average(self):
