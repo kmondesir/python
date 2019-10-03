@@ -10,28 +10,27 @@ class winnings:
     try:  
       self.draw_date = dt.strptime(draw_date, '%m/%d/%Y')
       self.draw_numbers = list(map(int, draw_numbers.split()))
+    except TypeError:
+      print("Type entered not expected, please use strings")
     except ValueError:
-      pass
-    except (TypeError, ZeroDivisionError):
-      pass
+      print("Value entered not expected")
+    except NameError:
+      print("Name error")
     except:
-      pass
-
-  @property    
+      print("Unexpected error")
+    
   def firstOdd(self):
     if self.draw_numbers[0] % 2 != 0:
       return True
     else:
       return False
   
-  @property
   def lastOdd(self):
     if self.draw_numbers[-1] % 2 != 0:
       return True
     else:
       return False
 
-  @property
   def isMostlyOdd(self):
     counter = 0
     for number in self.draw_numbers:
@@ -42,7 +41,6 @@ class winnings:
     else:
       return False
 
-  @property
   def isMostlyEven(self):
     counter = 0
     for number in self.draw_numbers:
@@ -53,43 +51,35 @@ class winnings:
     else:
       return False
 
-  @property
   def isFirstDigitSingle(self):
     if self.draw_numbers[0] < 10:
       return True  
     else:
       return False
 
-  @property
   def isFirstDigitDouble(self):
     if self.draw_numbers[0] > 9:
       return True
     else:
       return False
 
-  @property
   def getFirstNumber(self):
     return self.draw_numbers[0]
 
-  @property
   def getLastNumber(self):
     return self.draw_numbers[-1]
   
-  @property
   def total(self):
     return sum(self.draw_numbers)
   
-  @property
   def average(self):
-    return stat.mean(self.draw_number)
+    return stat.mean(self.draw_numbers)
   
-  @property
   def variance(self):
-    return stat.variance(self.draw_number)
+    return stat.variance(self.draw_numbers)
   
-  @property
   def standard_deviation(self):
-    return stat.stdev(self.draw_number)
+    return stat.stdev(self.draw_numbers)
 
   @staticmethod
   def generateRandomNumber(numbers=6,start=1,stop=59):
