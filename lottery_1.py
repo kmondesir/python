@@ -1,38 +1,84 @@
 import pandas as pd
 import os
-import array as arr
-from d_lottery import winnings as wins
+from lottery import winnings as wins
 
 path = os.getcwd()
+print(path)
 item = 'Lottery_NY_Lotto_Winning_Numbers__Beginning_2001.csv'
 
-COLS_TO_USE = ['Draw Date', 'Winning Numbers']
+print(item)
+ABS_PATH = os.path.join(path, item)
+print(ABS_PATH)
 
-print(path)
+df = pd.read_csv(ABS_PATH)
 
-CSV_PATH = os.path.join(path,item)
+global numbers
 
-print(CSV_PATH)
+numbers = []
 
-df = pd.read_csv(CSV_PATH, usecols=COLS_TO_USE)
+global firstDigit
+global lastDigit
 
-print(df)
+firstDigit = []
+lastDigit = []
 
-#print(df.loc['09/11/2019', 'Winning Numbers'])
+global firstOdd
+global lastOdd
 
-win = []
+firstOdd = []
+lastOdd = []
+
+global singleDigit
+global doubleDigit
+
+singleDigit = []
+doubleDigit = []
+
+global mostlyOdd
+
+mostlyOdd = []
+
+global total
+global average
+global standard_d
+global variance
+
+total = []
+average = []
+standard_d = []
+variance = []
 
 for index, row in df.iterrows():
-  print(index, row)
-  win.append(wins(df.loc[index, 'Draw Date'], df.loc[index, 'Winning Numbers']))
+  numbers.append(wins(str(row['Draw Date']),str(row['Winning Numbers'])))
 
-wins.generateRandomNumber()
+for i in numbers:
 
-print (str(win[0].draw_date))
-"""
-df['Draw Date'] = pd.to_datetime(df['Draw Date'], errors='coerce', format="%m/%d/%Y")
+  firstDigit.append(i.getFirstNumber())
+  lastDigit.append(i.getLastNumber())
 
-df['Winning Numbers'] = df['Winning Numbers'].apply(lambda x : x.split()) # Converts string into a list of strings
+  firstOdd.append(i.firstOdd())
+  lastOdd.append(i.lastOdd())
+  mostlyOdd.append(i.isMostlyOdd())
+  singleDigit.append(i.isFirstDigitSingle())
+  doubleDigit.append(i.isFirstDigitDouble())
 
-df['Winning Numbers'] = df['Winning Numbers'].apply(lambda x : list(map(int,x))) # Converts list of strings to list of ints
-"""
+  total.append(i.total())
+  average.append(i.average())
+  standard_d.append(i.standard_deviation())
+  variance.append(i.variance())
+
+print(variance[0])
+
+df['first digit'] = firstDigit
+df['last digit'] = lastDigit
+
+df['first odd digit'] = firstOdd
+df['last odd digit'] = lastOdd
+df['mostly odd'] = mostlyOdd
+df['first digit less than 10'] = singleDigit
+df['first digit greater than 9'] = doubleDigit
+
+df['sum'] = total
+df['average'] = average
+df['standard_d'] = standard_d
+df['variance'] = variance
