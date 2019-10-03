@@ -93,7 +93,7 @@ class winnings:
 
   @staticmethod
   def generateRandomNumber(numbers=6,start=1,stop=59):
-    seq = list(range(1,numbers))
+    seq = list(range(numbers))
     first = rand.randrange(1,9)
     seq[0] = first
     last = rand.randrange(40,stop)
