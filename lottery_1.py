@@ -4,7 +4,7 @@ from lottery import winnings as wins
 
 path = os.getcwd()
 print(path)
-item = 'Lottery_NY_Lotto_Winning_Numbers__Beginning_2001.csv'
+item = 'Lottery_Take_5_Winning_Numbers.csv'
 
 print(item)
 ABS_PATH = os.path.join(path, item)
@@ -85,4 +85,4 @@ df['average'] = average
 df['standard_d'] = standard_d
 df['variance'] = variance
 
-df.to_pickle('nylotto.pkl')
+df.to_pickle('nytake5.pkl')
