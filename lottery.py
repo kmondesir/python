@@ -82,11 +82,11 @@ class winnings:
     return stat.stdev(self.draw_numbers)
 
   @staticmethod
-  def generateRandomNumber(numbers=6,start=1,stop=59):
+  def generateRandomNumber(numbers=5,start=1,stop=39):
     seq = list(range(numbers))
-    first = rand.randrange(1,9)
+    first = rand.randrange(start, 9)
     seq[0] = first
-    last = rand.randrange(40,stop)
+    last = rand.randrange(30, stop)
     seq[-1] = last
 
     counter = 1

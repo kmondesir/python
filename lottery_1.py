@@ -85,4 +85,3 @@ df['average'] = average
 df['standard_d'] = standard_d
 df['variance'] = variance
 
-df.to_pickle('nytake5.pkl')
