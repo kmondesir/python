@@ -10,7 +10,9 @@ print(item)
 ABS_PATH = os.path.join(path, item)
 print(ABS_PATH)
 
-df = pd.read_csv(ABS_PATH)
+columns = ['Draw Date', 'Winning Numbers']
+
+df = pd.read_csv(ABS_PATH, usecols=columns)
 
 global numbers
 
@@ -82,3 +84,5 @@ df['sum'] = total
 df['average'] = average
 df['standard_d'] = standard_d
 df['variance'] = variance
+
+df.to_pickle('nylotto.pkl')
