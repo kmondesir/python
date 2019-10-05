@@ -85,3 +85,26 @@ df['average'] = average
 df['standard_d'] = standard_d
 df['variance'] = variance
 
+
+def generateRandomList(lower=30, upper=100):
+    result = list()
+    counter = 0
+    while sum(result).__le__(lower) or sum(result).__ge__(upper):
+      counter += 1
+      result = wins.generateRandomNumber()
+    else:
+      return result
+ 
+global new_numbers
+new_numbers = list()
+
+global counter
+counter = 0
+
+while counter < 100:
+  result = generateRandomList() 
+  if result not in list(df['Winning Numbers']):
+    new_numbers.append(result)
+    counter += 1
+  else:
+    pass

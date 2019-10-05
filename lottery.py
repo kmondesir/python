@@ -100,3 +100,13 @@ class winnings:
         seq[counter] = item
         counter += 1
     return sorted(seq)
+
+  @staticmethod
+  def generateRandomList(lower=30, upper=100):
+    result = list()
+    counter = 0
+    while sum(result).__le__(lower) or sum(result).__ge__(upper):
+      counter += 1
+      result = generateRandomNumber()
+    else:
+      return result
