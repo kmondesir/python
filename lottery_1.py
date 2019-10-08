@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+
 from lottery import winnings as wins
 
 path = os.getcwd()
@@ -86,14 +87,14 @@ df['standard_d'] = standard_d
 df['variance'] = variance
 
 
-def generateRandomList(lower=30, upper=100):
-    result = list()
-    counter = 0
-    while sum(result).__le__(lower) or sum(result).__ge__(upper):
-      counter += 1
-      result = wins.generateRandomNumber()
-    else:
-      return result
+def generateRandomList(lower=84, upper=115):
+  result = list()
+  counter = 0
+  while sum(result).__le__(lower) or sum(result).__ge__(upper):
+    counter += 1
+    result = wins.generateRandomNumber()
+  else:
+    return result
  
 global new_numbers
 new_numbers = list()
