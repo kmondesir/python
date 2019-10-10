@@ -109,3 +109,5 @@ while counter < 100:
     counter += 1
   else:
     pass
+
+  help(df)

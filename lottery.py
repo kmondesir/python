@@ -3,6 +3,8 @@ import random as rand
 import statistics as stat
 class winnings:
   """
+  Performs various calculates on a series of numbers
+
   https://stackoverflow.com/questions/12906402/type-object-datetime-datetime-has-no-attribute-datetime
   """
   def __init__(self, draw_date, draw_numbers):
@@ -20,73 +22,92 @@ class winnings:
       print("Unexpected error")
     
   def firstOdd(self):
+    """ Returns True if the first digit is odd """
     if self.draw_numbers[0] % 2 != 0:
       return True
     else:
       return False
   
   def lastOdd(self):
+    """ Returns True if the last digit is odd """
     if self.draw_numbers[-1] % 2 != 0:
       return True
     else:
       return False
 
   def isMostlyOdd(self):
+    """ Returns True if more than half of the values are odd """
     counter = 0
     for number in self.draw_numbers:
       if (number % 2 != 0):
         counter = counter + 1
-    if counter > 2:
+    if counter > len(self.draw_numbers)/2:
       return True
     else:
       return False
 
   def isMostlyEven(self):
+    """ Returns True if more than half of the values are even """
     counter = 0
     for number in self.draw_numbers:
       if (number % 2 == 0):
         counter = counter + 1
-    if counter > 2:
+    if counter > len(self.draw_numbers)/2:
       return True
     else:
       return False
 
   def isFirstDigitSingle(self):
+    """ Returns True if the first digit is less than 10 """
     if self.draw_numbers[0] < 10:
       return True  
     else:
       return False
 
   def isFirstDigitDouble(self):
+    """ Returns True if the first digit is greater than 9 """
     if self.draw_numbers[0] > 9:
       return True
     else:
       return False
 
   def getFirstNumber(self):
+    """ Returns the first number in a sequence """
     return self.draw_numbers[0]
 
   def getLastNumber(self):
+    """ Returns the last number in a sequence """
     return self.draw_numbers[-1]
   
   def total(self):
+    """ Returns the sum of all values in the sequence """
     return sum(self.draw_numbers)
   
   def average(self):
+    """ Returns the average of all values in the sequence """
     return stat.mean(self.draw_numbers)
   
   def variance(self):
+    """ Returns the variance of all values in the sequence """
     return stat.variance(self.draw_numbers)
   
   def standard_deviation(self):
+    """ Returns the standard deviation of all values in the sequence """
     return stat.stdev(self.draw_numbers)
 
   @staticmethod
-  def generateRandomNumber(numbers=5,start=1,stop=39):
+  def generateRandomNumber(numbers=6,start=1,stop=59):
+    """ Generates random numbers based on three arguments
+      numbers: length of series
+
+      start: start of range
+
+      stop: end of range
+    """
     seq = list(range(numbers))
-    first = rand.randrange(start, 9)
+    first = rand.randrange(1,9)
     seq[0] = first
-    last = rand.randrange(30, stop)
+    last = rand.randrange(40,stop)
     seq[-1] = last
 
     counter = 1
@@ -100,6 +121,7 @@ class winnings:
         seq[counter] = item
         counter += 1
     return sorted(seq)
+<<<<<<< HEAD
 
   @staticmethod
   def generateRandomList(lower=30, upper=100):
@@ -110,3 +132,5 @@ class winnings:
       result = generateRandomNumber()
     else:
       return result
+=======
+>>>>>>> 97ee20839c9eebf6eb99e4d5fbc2b86cf5e2f1aa
