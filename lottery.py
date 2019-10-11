@@ -158,6 +158,6 @@ class winnings:
     counter = 0
     while sum(result).__le__(lower) or sum(result).__ge__(upper):
       counter += 1
-      result = generateRandomNumber()
+      result = winnings.generateRandomNumber()
     else:
       return result
