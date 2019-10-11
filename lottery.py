@@ -1,6 +1,33 @@
-from datetime import datetime as dt
+
+
+
+
+import logging as log
 import random as rand
 import statistics as stat
+from datetime import datetime as dt
+
+severity = {
+    'CRITICAL': 50,
+    'ERROR': 40,
+    'WARNING': 30,
+    'INFO': 20,
+    'DEBUG': 10,
+    'NOTSET': 0,
+}
+
+logger = log.getLogger(__name__)
+formatter = log.Formatter('%(asctime)s:%(name)s:%(message)s')
+
+file_handler = log.FileHandler('lottery')
+file_handler.setLevel(severity['INFO'])
+file_handler.setFormatter(formatter)
+
+stream_handler = log.StreamHandler()
+stream_handler.setFormatter(formatter)
+
+logger.addHandler(file_handler)
+logger.addHandler(stream_handler)
 class winnings:
   """
   Performs various calculates on a series of numbers
@@ -12,14 +39,17 @@ class winnings:
     try:  
       self.draw_date = dt.strptime(draw_date, '%m/%d/%Y')
       self.draw_numbers = list(map(int, draw_numbers.split()))
-    except TypeError:
-      print("Type entered not expected, please use strings")
-    except ValueError:
-      print("Value entered not expected")
-    except NameError:
-      print("Name error")
-    except:
-      print("Unexpected error")
+    except TypeError as e:
+      logger.error(e)
+    except ValueError as e:
+      logger.error(e)
+    except NameError as e:
+      logger.error(e)
+    except Exception as e:
+      logger.error(e)
+    else:
+      logger.debug(self.draw_date)
+      logger.debug(self.draw_numbers)
     
   def firstOdd(self):
     """ Returns True if the first digit is odd """
@@ -121,7 +151,6 @@ class winnings:
         seq[counter] = item
         counter += 1
     return sorted(seq)
-<<<<<<< HEAD
 
   @staticmethod
   def generateRandomList(lower=30, upper=100):
@@ -132,5 +161,3 @@ class winnings:
       result = generateRandomNumber()
     else:
       return result
-=======
->>>>>>> 97ee20839c9eebf6eb99e4d5fbc2b86cf5e2f1aa
