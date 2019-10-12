@@ -40,7 +40,7 @@ class returndate:
 
   def __init__(self, r_date=date.today(), value=None):
     try:
-      #expressed as days
+      # value is expressed as an integer representing days
       if value is None:
         self.r_date = r_date
       else:
@@ -59,16 +59,17 @@ class returndate:
     """ Returns previous business date, skipping the weekend"""
     
     if self.r_date.weekday() == weekdays.index('Saturday'):
-      #subtract 1 day
+      # subtract 1 day
       result = (self.r_date + timedelta(days=returndate.minus1)).isoformat()
       logger.debug(result)
       return result
     elif self.r_date.weekday() == weekdays.index('Sunday'):
-      #subtract 2 days
+      # subtract 2 days
       result = (self.r_date + timedelta(days=returndate.minus2)).isoformat()
       logger.debug(result)
       return result
     else:
+      # if not a weekend then date is returned as is
       result = self.r_date.isoformat()
       logger.debug(result)
       return result
@@ -77,16 +78,17 @@ class returndate:
     """ Returns next business date, skipping the weekend"""
 
     if self.r_date.weekday() == weekdays.index('Saturday') :
-      #add 1 day
+      # add 1 day
       result = (self.r_date.weekday() + timedelta(days=returndate.plus2)).isoformat()
       logger.debug(result)
       return result
     elif self.r_date.weekday() == weekdays.index('Sunday'):
-      #add 2 days
+      # add 2 days
       result = (self.r_date.weekday() + timedelta(days=returndate.plus1)).isoformat()
       logger.debug(result)
       return result
     else:
+      # if not a weekend then date is returned as is
       result = self.r_date.isoformat()
       logger.debug(result)
       return result
