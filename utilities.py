@@ -38,11 +38,7 @@ class opening:
   fullpath = None
 
   def __init__(self, path=os.getcwd(), item=os.__file__):
-    """
-    Checks for the existence of the file, if it doesn't not exist an error is returned. 
-
-    """
-
+    # tests whether the file exists and throws an error if not
     self.path = path
     self.item = item
     opening.fullpath = os.path.join(path, item)
@@ -50,13 +46,11 @@ class opening:
       os.path.exists(opening.fullpath)
     except IOError as e:
       logger.warning(e)
-    
+    except Exception as e:
+      logger.warning(e)
     
   def read(self):
-    """
-    Attempts to open the file and if successful will copy its contents to the object created.
-    
-    """
+    # open a file and returns its contents to the caller
     try:
       f = open(opening.fullpath, 'r')
     except PermissionError as e:
@@ -71,10 +65,7 @@ class opening:
       f.close()
 
   def write(self, value):
-    """
-    Attempts to open the file and if successful will write the string entered when calling this function.
-
-    """
+    # opens a file and writes to it
     try:
       f = open(opening.fullpath, 'w')
     except PermissionError as e:

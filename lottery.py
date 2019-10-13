@@ -52,21 +52,21 @@ class winnings:
       logger.debug(self.draw_numbers)
     
   def firstOdd(self):
-    """ Returns True if the first digit is odd """
+    # Returns True if the first digit is odd
     if self.draw_numbers[0] % 2 != 0:
       return True
     else:
       return False
   
   def lastOdd(self):
-    """ Returns True if the last digit is odd """
+    # Returns True if the last digit is odd 
     if self.draw_numbers[-1] % 2 != 0:
       return True
     else:
       return False
 
   def isMostlyOdd(self):
-    """ Returns True if more than half of the values are odd """
+    # Returns True if more than half of the values are odd
     counter = 0
     for number in self.draw_numbers:
       if (number % 2 != 0):
@@ -77,7 +77,7 @@ class winnings:
       return False
 
   def isMostlyEven(self):
-    """ Returns True if more than half of the values are even """
+    # Returns True if more than half of the values are even
     counter = 0
     for number in self.draw_numbers:
       if (number % 2 == 0):
@@ -88,41 +88,41 @@ class winnings:
       return False
 
   def isFirstDigitSingle(self):
-    """ Returns True if the first digit is less than 10 """
+    # Returns True if the first digit is less than 10
     if self.draw_numbers[0] < 10:
       return True  
     else:
       return False
 
   def isFirstDigitDouble(self):
-    """ Returns True if the first digit is greater than 9 """
+    # Returns True if the first digit is greater than 9
     if self.draw_numbers[0] > 9:
       return True
     else:
       return False
 
   def getFirstNumber(self):
-    """ Returns the first number in a sequence """
+    # Returns the first number in a sequence
     return self.draw_numbers[0]
 
   def getLastNumber(self):
-    """ Returns the last number in a sequence """
+    # Returns the last number in a sequence
     return self.draw_numbers[-1]
   
   def total(self):
-    """ Returns the sum of all values in the sequence """
+    # Returns the sum of all values in the sequence
     return sum(self.draw_numbers)
   
   def average(self):
-    """ Returns the average of all values in the sequence """
+    # Returns the average of all values in the sequence
     return stat.mean(self.draw_numbers)
   
   def variance(self):
-    """ Returns the variance of all values in the sequence """
+    # Returns the variance of all values in the sequence
     return stat.variance(self.draw_numbers)
   
   def standard_deviation(self):
-    """ Returns the standard deviation of all values in the sequence """
+    # Returns the standard deviation of all values in the sequence
     return stat.stdev(self.draw_numbers)
 
   @staticmethod
