@@ -55,7 +55,7 @@ class opening:
   def read(self):
     # open a file and returns its contents to the caller
     try:
-      f = open(opening.fullpath, 'r')
+      f = open(opening.fullpath, 'r+')
     except PermissionError as e:
       logger.warning(e)
     except IOError as e:
@@ -70,7 +70,22 @@ class opening:
   def write(self, value):
     # opens a file and writes to it
     try:
-      f = open(opening.fullpath, 'w')
+      f = open(opening.fullpath, 'w+')
+    except PermissionError as e:
+      logger.warning(e)
+    except IOError as e:
+      logger.warning(e)
+    except Exception as e:
+      logger.warning(e)
+    else:
+      f.write(value)
+    finally:
+      f.close()
+
+	def append(self, value):
+		# opens a file and appends data to it
+    try:
+      f = open(opening.fullpath, 'a+')
     except PermissionError as e:
       logger.warning(e)
     except IOError as e:
