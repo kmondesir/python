@@ -93,5 +93,9 @@ class returndate:
       logger.debug(result)
       return result
 
+  def weekday(self):
+    # returns a string representation of the weekday
+    return weekdays[self.r_date.weekday()]
+
   def __str__(self):
     return str(self.r_date.isoformat())
