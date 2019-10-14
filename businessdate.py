@@ -140,7 +140,10 @@ class returndate:
 	def lastdayofyear(self):
 		pass
 				
-	def daytoendofyear(self):
+	def daystoendofyear(self):
+		pass
+	
+	def daysfromthebeginningoftheyear(self):
 		pass
 								
   def __str__(self):
