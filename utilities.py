@@ -93,6 +93,15 @@ class querying:
   https://www.youtube.com/watch?v=aF552bMEcO4
   """
 
+drivers = {
+            'MS_ACCESS': 50,
+            'MS_SQL': 40,
+            'MY_SQL': 30,
+            'ORACLE': 20,
+            'MARIADB': '',
+            'POSTGRESQL': ''
+}
+
   conn = None
 
   def __init__(self, driver, server, database, trusted='yes'):
