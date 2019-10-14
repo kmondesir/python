@@ -80,12 +80,12 @@ class returndate:
 
     if self.r_date.weekday() == returndate.weekdays.index('Saturday') :
       # add 1 day
-      result = (self.r_date.weekday() + timedelta(days=returndate.plus2)).isoformat()
+      result = (self.r_date + timedelta(days=returndate.plus2)).isoformat()
       logger.debug(result)
       return result
     elif self.r_date.weekday() == returndate.weekdays.index('Sunday'):
       # add 2 days
-      result = (self.r_date.weekday() + timedelta(days=returndate.plus1)).isoformat()
+      result = (self.r_date + timedelta(days=returndate.plus1)).isoformat()
       logger.debug(result)
       return result
     else:
@@ -95,15 +95,17 @@ class returndate:
       return result
 
   def weekday(self):
-    # returns a string representation of the weekday 
-    return returndate.weekdays[self.r_date.weekday()]
+    # returns a string representation of the weekday
+		result = returndate.weekdays[self.r_date.weekday()]
+		logger.debug(result)
+    return result
 
   def firstdateofweek(self):
 		#returns a the first date of a given week determined by the date attribute passed in
 		length = len(returndate.weekdays)
 		numberofdaysfromlastdayofweek = length - self.r_date.weekday()
 		if self.r_date.weekday() > 0:
-			result = (self.r_date.weekday() - timedelta(days=numberofdaysfromlastdayofweek).isoformat()
+			result = (self.r_date - timedelta(days=numberofdaysfromlastdayofweek).isoformat()
 			logger.debug(result)
 			return result
 		else:
@@ -114,7 +116,7 @@ class returndate:
 		length = len(returndate.weekdays)
 		numberofdaysfromlastdayofweek = length - self.r_date.weekday()
 		if self.r_date.weekday() < length:
-			result = (self.r_date.weekday() + timedelta(days=numberofdaysfromlastdayofweek).isoformat()
+			result = (self.r_date + timedelta(days=numberofdaysfromlastdayofweek).isoformat()
 			logger.debug(result)
 			return result
 		else:
