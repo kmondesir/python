@@ -119,7 +119,28 @@ class returndate:
 			return result
 		else:
 			return self.r_date.isoformat()
-
+				  
+	def firstdateofmonth(self):
+		pass
+								
+	def firstdayofmonth(self):
+		pass
+	
+	def firstdayofyear(self):
+		pass
+	
+	def lastdateofmonth(self):
+		pass
+								
+	def lastdayofmonth(self):
+		pass
+	
+	def lastdayofyear(self):
+		pass
+				
+	def daytoendofyear(self):
+		pass
+								
   def __str__(self):
 		#returns a iso format string of the date object
     return str(self.r_date.isoformat())
