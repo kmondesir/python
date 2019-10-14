@@ -96,7 +96,7 @@ class returndate:
 
   def weekday(self):
     # returns a string representation of the weekday 
-    return weekdays[self.r_date.weekday()]
+    return returndate.weekdays[self.r_date.weekday()]
 
   def firstdateofweek(self):
 		#returns a the first date of a given week determined by the date attribute passed in
@@ -104,9 +104,10 @@ class returndate:
 		numberofdaysfromlastdayofweek = length - self.r_date.weekday()
 		if self.r_date.weekday() > 0:
 			result = (self.r_date.weekday() - timedelta(days=numberofdaysfromlastdayofweek).isoformat()
+			logger.debug(result)
 			return result
 		else:
-			return self.r_date
+			return self.r_date.isoformat()
 	
 	def lastdateofweek(self):
 		#returns a the last date of a given week determined by the date attribute passed in
@@ -114,9 +115,10 @@ class returndate:
 		numberofdaysfromlastdayofweek = length - self.r_date.weekday()
 		if self.r_date.weekday() < length:
 			result = (self.r_date.weekday() + timedelta(days=numberofdaysfromlastdayofweek).isoformat()
+			logger.debug(result)
 			return result
 		else:
-			return self.r_date
+			return self.r_date.isoformat()
 
   def __str__(self):
 		#returns a iso format string of the date object
