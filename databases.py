@@ -65,7 +65,7 @@ def __init__(self, driver, server, database, trusted='yes'):
     sqlstate = e.args[1]
     logger.warning(sqlstate)
   else:
-    querying.conn = pyodbc.connect(
+    queries.conn = pyodbc.connect(
         "Driver={};Server={};Database={};Trusted_Connection={}".format(self.driver, self.server, self.database, self.trusted))
   
 def create(self, sql):
@@ -75,14 +75,14 @@ def create(self, sql):
     sqlstate = e.args[1]
     logger.warning(sqlstate)
   else:
-    querying.conn.commit()
+    queries.conn.commit()
   finally:
     pass
 
 def read(self, sql):
   # using self to provide the connection string it executes a query based on the SQL provided and returns a dataframe
   try:
-    cursor = querying.conn.cursor()
+    cursor = queries.conn.cursor()
   except pyodbc.Error as e:
     sqlstate = e.args[1]
     logger.warning(sqlstate)
@@ -99,7 +99,7 @@ def update(self, sql):
     sqlstate = e.args[1]
     logger.warning(sqlstate)
   else:
-    querying.conn.commit()
+    queries.conn.commit()
   finally:
     pass
 
@@ -110,6 +110,6 @@ def delete(self, sql):
     sqlstate = e.args[1]
     logger.warning(sqlstate)
   else:
-    querying.conn.commit()
+    queries.conn.commit()
   finally:
     pass
