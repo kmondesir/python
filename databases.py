@@ -42,12 +42,12 @@ class querying:
   """
 
 drivers = {
-            'MS_ACCESS': 50,
-            'MS_SQL': 40,
-            'MY_SQL': 30,
-            'ORACLE': 20,
-            'MARIADB': '',
-            'POSTGRESQL': ''
+    'MS_ACCESS': 'Microsoft Access Driver (*.mdb, *.accdb)',
+            'MS_SQL': 'SQL Server',
+            'MY_SQL': 'MySQL ODBC 3.51 Driver',
+            'ORACLE': 'Oracle in OraClient11g_home1',
+            'MARIADB': 'MariaDB Connector/C 3.1',
+            'POSTGRESQL': 'PostgreSQL Unicode'
 }
 
 conn = None
