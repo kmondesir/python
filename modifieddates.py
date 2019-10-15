@@ -28,7 +28,7 @@ stream_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
-class returndate:
+class returndates:
   """
   Provides various methods for manipulating and return dates, days, months, year, etc. 
 

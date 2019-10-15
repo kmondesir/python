@@ -30,7 +30,7 @@ stream_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
-class querying:
+class queries:
 
   """
   Creates a connection string and provides CRUD methods for data manipulation
