@@ -2,6 +2,10 @@
 
 
 
+
+
+
+
 import logging as log
 import calendar as cal
 from datetime import date, timedelta
@@ -41,7 +45,7 @@ class returndates:
   plus1 = 1
   plus2 = 2
 
-  def __init__(self, r_date=date.today(), value=0):
+  def __init__(self, r_date=date.today()):
     self.weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     self.months = ("January", "February", "March", "April", "May", "June", \
       "July", "August", "September", "October", "November", "December")
@@ -51,6 +55,7 @@ class returndates:
       self.month = r_date.month - 1
       self.day = r_date.day
       self.number_of_days_in_a_month = cal.monthrange(self.year, self.month)[1]
+      self.r_date = r_date
     except TypeError as e:
       logger.error(e)
     except ValueError as e:
@@ -58,15 +63,12 @@ class returndates:
     except Exception as e:
       logger.error(e)
     else:
-      self.value = value
-      self.r_date = r_date + timedelta(days=self.value)
-      
       logger.debug(self.r_date)
-      logger.debug(self.value)
 
-  def previousbusinessdate(self):
+  def previousbusinessdate(self, value=0):
     """ Returns previous business date, skipping the weekend"""
-    
+    self.r_date = self.r_date + timedelta(days=value)
+
     if self.r_date.weekday() == self.weekdays.index('Saturday'):
       # subtract 1 day
       result = (self.r_date + timedelta(days=returndates.minus1)).isoformat()
@@ -83,8 +85,9 @@ class returndates:
       logger.debug(result)
       return result
 
-  def nextbusinessdate(self):
+  def nextbusinessdate(self, value=0):
     """ Returns next business date, skipping the weekend"""
+    self.r_date = self.r_date + timedelta(days=value)
 
     if self.r_date.weekday() == self.weekdays.index('Saturday') :
       # add 1 day
