@@ -1,7 +1,7 @@
 import modifieddates as md
 from datetime import date
 
-result = md.returndates()
+result = md.returndates(5)
 
 # help(result)
 

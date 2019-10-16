@@ -59,6 +59,8 @@ class returndates:
       logger.error(e)
     except AttributeError as e:
       logger.error(e)
+    except NameError as e:
+      logger.error(e)
     except ValueError as e:
       logger.error(e)
     except Exception as e:
