@@ -101,12 +101,6 @@ class returndates:
       logger.debug(result)
       return result
 
-  def weekday(self):
-    """ returns a string representation of the weekday """
-    result = self.weekdays[self.r_date.weekday()]
-    logger.debug(result)
-    return result
-
   def firstdateofweek(self):
     """ returns a the first date of a given week determined by the date attribute passed in """
     number_of_days_from_first_day_of_week = 0 + self.r_date.weekday()
