@@ -47,9 +47,11 @@ class returndates:
       "July", "August", "September", "October", "November", "December")
     try:
       # value is expressed as an integer representing days
+      year,week_num,dow = r_date.isocalendar()
       self.year = r_date.year
       self.month = r_date.month - 1
       self.day = r_date.day
+      self.week = week_num
       self.number_of_days_in_a_month = cal.monthrange(self.year, self.month)[1]
       self.r_date = r_date
     except TypeError as e:
@@ -166,6 +168,10 @@ class returndates:
     """ returns the full name of the day of the week """
     result = self.weekdays[self.r_date.weekday()]
     return result
+
+  def whatweek(self):
+    """ returns the week number of the date object """
+    return self.whatweek
 
   def __str__(self):
     """ returns string of r_date in iso standard format """
