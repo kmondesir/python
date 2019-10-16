@@ -28,6 +28,7 @@ logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
 number_of_days_in_a_week = 7
+number_of_days_in_a_year = 365
 
 class returndates:
   """
@@ -84,7 +85,7 @@ class returndates:
     """ Returns next business date, skipping the weekend"""
     self.r_date = self.r_date + timedelta(days=value)
 
-    if self.r_date.weekday() == self.weekdays.index('Saturday') :
+    if self.r_date.weekday() == self.weekdays.index('Saturday'):
       # add 1 day
       result = (self.r_date + timedelta(days=returndates.plus2)).isoformat()
       logger.debug(result)
@@ -101,13 +102,13 @@ class returndates:
       return result
 
   def weekday(self):
-    # returns a string representation of the weekday
+    """ returns a string representation of the weekday """
     result = self.weekdays[self.r_date.weekday()]
     logger.debug(result)
     return result
 
   def firstdateofweek(self):
-    # returns a the first date of a given week determined by the date attribute passed in
+    """ returns a the first date of a given week determined by the date attribute passed in """
     number_of_days_from_first_day_of_week = 0 + self.r_date.weekday()
     if self.r_date.weekday() > 0:
       result = (self.r_date - timedelta(days=number_of_days_from_first_day_of_week)).isoformat()
@@ -117,7 +118,7 @@ class returndates:
       return self.r_date.isoformat()
 
   def lastdateofweek(self):
-    # returns a the last date of a given week determined by the date attribute passed in
+    """ returns a the last date of a given week determined by the date attribute passed in """
     length = number_of_days_in_a_week - 1
     number_of_days_from_last_day_of_week = length - self.r_date.weekday()
     if self.r_date.weekday() < length:
@@ -128,47 +129,45 @@ class returndates:
       return self.r_date.isoformat()
                 
   def firstdayofmonth(self):
-    # returns the first day of the month
+    """ returns the first day of the month """
     result = date(self.r_date.year, self.r_date.month, 1)
     return self.weekdays[result.weekday()]
 
   def firstdayofyear(self):
-    # returns the first day of year
+    """ returns the first day of year """
     result = date(self.r_date.year, 1, 1).weekday()
     return self.weekdays[result]
                 
   def lastdayofmonth(self):
-    # returns the last day of the month
+    """ returns the last day of the month """
     result = date(self.r_date.year, self.r_date.month, self.number_of_days_in_a_month).weekday()
     return self.weekdays[result + 1]
 
   def lastdayofyear(self):
-    # returns the last day of the year
+    """ returns the last day of the year """
     result = date(self.r_date.year,12,31).weekday()
     return self.weekdays[result]
         
   def daystoendofyear(self):
-    # returns the number of days until the end of the year
-    enddate = date(self.r_date.year,12,31)
-    result = enddate - self.r_date
-    return result.days + 1
+    """ returns the number of days until the end of the year """
+    result = date(self.r_date.year,12,31) - self.r_date
+    return result.days
 
   def daysfromthebeginningoftheyear(self):
-    # returns the number of days from the beginning of the year
-    startdate = date(self.r_date.year,1,1)
-    result = startdate + self.r_date
-    return result.days + 1
+    """ returns the number of days from the beginning of the year """ 
+    result = date(self.r_date.year,1,1) - self.r_date 
+    return abs(result.days)
 
   def whatmonth(self):
-    # returns full name value of the month
+    """ returns full name value of the month """ 
     result = self.months[self.month]
     return result
 
   def whatday(self):
-    # returns full name of the day of the week
+    """ returns full name value of the day """ 
     result = self.weekdays[self.r_date.weekday()]
     return result
 
   def __str__(self):
-    #returns a iso format string of the date object
+    """ returns string of r_date in iso standard format """
     return str(self.r_date.isoformat())
