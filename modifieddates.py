@@ -171,7 +171,7 @@ class returndates:
 
   def whatweek(self):
     """ returns the week number of the date object """
-    return self.whatweek
+    return self.week
 
   def __str__(self):
     """ returns string of r_date in iso standard format """
