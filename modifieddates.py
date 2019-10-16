@@ -15,7 +15,7 @@ severity = {
 }
 
 logger = log.getLogger(__name__)
-formatter = log.Formatter('%(asctime)s:%(name)s:%(message)s')
+formatter = log.Formatter('timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
 file_handler = log.FileHandler('businessdate')
 file_handler.setLevel(severity['INFO'])
@@ -56,6 +56,8 @@ class returndates:
       self.number_of_days_in_a_month = cal.monthrange(self.year, self.month)[1]
       self.r_date = r_date
     except TypeError as e:
+      logger.error(e)
+    except AttributeError as e:
       logger.error(e)
     except ValueError as e:
       logger.error(e)
