@@ -62,7 +62,7 @@ class returndates:
 
   def previousbusinessdate(self, value=0):
     """ Returns previous business date, skipping the weekend"""
-    self.r_date = self.r_date + timedelta(days=value)
+    self.r_date = self.r_date - timedelta(days=value)
 
     if self.r_date.weekday() == self.weekdays.index('Saturday'):
       # subtract 1 day
