@@ -129,20 +129,28 @@ class returndates:
     else:
       return self.r_date.isoformat()
                 
-  def firstdayofmonth(self):
+  def firstdayofmonth(self, day_of_week):
     """ returns the first day of the month """
     result = date(self.r_date.year, self.r_date.month, 1)
-    return self.weekdays[result.weekday()]
+    logger.debug(result)
+    if result.weekday() >= day_of_week:
+      return self.r_date
+    else:
+      return (self.r_date + timedelta(days=number_of_days_in_a_week)).isoformat()
 
   def firstdayofyear(self):
     """ returns the first day of year """
     result = date(self.r_date.year, 1, 1).weekday()
     return self.weekdays[result]
                 
-  def lastdayofmonth(self):
+  def lastdayofmonth(self, day_of_week):
     """ returns the last day of the month """
     result = date(self.r_date.year, self.r_date.month, self.number_of_days_in_a_month).weekday()
-    return self.weekdays[result + 1]
+    logger.debut(result)
+    if result.weekday() <= day_of_week:
+      return self.weekdays[result + 1]
+    else:
+      return (self.r_date - timedelta(days=number_of_days_in_a_week)).isoformat()
 
   def lastdayofyear(self):
     """ returns the last day of the year """
