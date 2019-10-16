@@ -158,7 +158,12 @@ class returndates:
     return result
 
   def whatday(self):
-    """ returns full name value of the day """ 
+    """ returns day number for the date object """ 
+    result = date(self.r_date.year,1,1) - self.r_date 
+    return abs(result.days) + 1
+
+  def whatdayofweek(self):
+    """ returns the full name of the day of the week """
     result = self.weekdays[self.r_date.weekday()]
     return result
 

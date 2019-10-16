@@ -3,7 +3,7 @@ from datetime import date
 
 result = md.returndates()
 
-help(result)
+# help(result)
 
 print(result.daysfromthebeginningoftheyear())
 
@@ -16,3 +16,7 @@ print(result.lastdateofweek())
 print(result.firstdayofmonth())
 
 print(result.lastdayofmonth())
+
+print(result.whatday())
+
+print(result.whatdayofweek())
