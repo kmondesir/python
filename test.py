@@ -20,3 +20,5 @@ print(result.lastdayofmonth())
 print(result.whatday())
 
 print(result.whatdayofweek())
+
+print(result.whatweek())
