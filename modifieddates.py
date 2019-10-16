@@ -28,6 +28,7 @@ logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
 number_of_days_in_a_week = 7
+number_of_weeks_in_a_year = 52
 number_of_days_in_a_year = 365
 
 class returndates:
