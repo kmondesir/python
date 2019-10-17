@@ -231,7 +231,7 @@ class returndates:
 
   def whatdayofweek(self):
     """ returns the full name of the day of the week """
-    result = self.weekdays[self.day]
+    result = self.weekdays[self.day - 1]
     logger.debug(result)
     return result
 
