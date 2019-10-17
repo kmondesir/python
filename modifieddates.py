@@ -147,11 +147,13 @@ class returndates:
     """
     first_day_of_month = date(self.year, self.month, 1)
     logger.debug(first_day_of_month)
-    if first_day_of_month.weekday() <= day_of_week:
+    if first_day_of_month.weekday() < day_of_week:
       difference_of_days = abs(first_day_of_month.weekday() - day_of_week)
       result = first_day_of_month + timedelta(days=difference_of_days)
       logger.debug(result)
       return result.isoformat()
+    elif first_day_of_month.weekday == day_of_week:
+      return first_day_of_month.isoformat()
     else:
       difference_of_days = first_day_of_month.weekday() - day_of_week
       result = first_day_of_month + timedelta(days=number_of_days_in_a_week - difference_of_days)
@@ -183,11 +185,13 @@ class returndates:
     last_day_of_month = date(self.year, self.month, self.number_of_days_in_a_month)
     logger.debug(last_day_of_month)
     print(last_day_of_month.weekday())
-    if last_day_of_month.weekday() >= day_of_week:
+    if last_day_of_month.weekday() > day_of_week:
       difference_of_days = last_day_of_month.weekday() - day_of_week
       result = last_day_of_month - timedelta(days=difference_of_days)
       logger.debug(result)
       return result.isoformat()
+    elif last_day_of_month == day_of_week:
+      return last_day_of_month.isoformat()
     else:
       difference_of_days = day_of_week - last_day_of_month.weekday()
       result = last_day_of_month - timedelta(days=number_of_days_in_a_week + difference_of_days)
