@@ -15,7 +15,7 @@ print(result.lastdateofweek())
 
 print(result.firstdayofmonth(0))
 
-print(result.lastdayofmonth(7))
+print(result.lastdayofmonth(6))
 
 print(result.whatday())
 

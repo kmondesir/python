@@ -110,7 +110,7 @@ class returndates:
 
   def firstdateofweek(self):
     """ returns a the first date of a given week determined by the date attribute passed in """
-    number_of_days_from_first_day_of_week = 0 + self.day
+    number_of_days_from_first_day_of_week = self.day - 1
     if self.day > 0:
       result = (self.r_date - timedelta(days=number_of_days_from_first_day_of_week)).isoformat()
       logger.debug(result)
@@ -120,7 +120,7 @@ class returndates:
 
   def lastdateofweek(self):
     """ returns a the last date of a given week determined by the date attribute passed in """
-    length = number_of_days_in_a_week - 1
+    length = number_of_days_in_a_week
     number_of_days_from_last_day_of_week = length - self.day
     if self.day < length:
       result = (self.r_date + timedelta(days=number_of_days_from_last_day_of_week)).isoformat()
@@ -183,6 +183,7 @@ class returndates:
     
     """
     last_day_of_month = date(self.year, self.month, self.number_of_days_in_a_month)
+    day_of_week -= 1
     logger.debug(last_day_of_month)
     print(last_day_of_month.weekday())
     if last_day_of_month.weekday() > day_of_week:
