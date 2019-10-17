@@ -194,7 +194,7 @@ class returndates:
       return last_day_of_month.isoformat()
     else:
       difference_of_days = day_of_week - last_day_of_month.weekday()
-      result = last_day_of_month - timedelta(days=number_of_days_in_a_week + difference_of_days)
+      result = last_day_of_month - timedelta(days=number_of_days_in_a_week - difference_of_days)
       logger.debug(result)
       return result.isoformat()
 
