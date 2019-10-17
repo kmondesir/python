@@ -49,9 +49,9 @@ class returndates:
     try:
       # value is expressed as an integer representing days
       year,week_num,dow = r_date.isocalendar()
-      self.year = r_date.year
+      self.year = year
       self.month = r_date.month - 1
-      self.day = r_date.day
+      self.day = dow
       self.week = week_num
       self.number_of_days_in_a_month = cal.monthrange(self.year, self.month)[1]
       self.r_date = r_date
@@ -134,9 +134,9 @@ class returndates:
     result = date(self.r_date.year, self.r_date.month, 1)
     logger.debug(result)
     if result.weekday() >= day_of_week:
-      return self.r_date
+      return result + timedelta(days=(result.weekday() - day_of_week)).isoformat()
     else:
-      return (self.r_date + timedelta(days=number_of_days_in_a_week)).isoformat()
+      return (result + timedelta(days=number_of_days_in_a_week)).isoformat()
 
   def firstdayofyear(self):
     """ returns the first day of year """
@@ -145,12 +145,12 @@ class returndates:
                 
   def lastdayofmonth(self, day_of_week):
     """ returns the last day of the month """
-    result = date(self.r_date.year, self.r_date.month, self.number_of_days_in_a_month).weekday()
+    result = date(self.r_date.year, self.r_date.month, self.number_of_days_in_a_month)
     logger.debut(result)
     if result.weekday() <= day_of_week:
-      return self.weekdays[result + 1]
+      return result - timedelta(days=(result.weekday() - day_of_week)).isoformat()
     else:
-      return (self.r_date - timedelta(days=number_of_days_in_a_week)).isoformat()
+      return (result - timedelta(days=number_of_days_in_a_week)).isoformat()
 
   def lastdayofyear(self):
     """ returns the last day of the year """
