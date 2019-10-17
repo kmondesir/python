@@ -70,43 +70,55 @@ class returndates:
 
   def previousbusinessdate(self, value=0):
     """ Returns previous business date, skipping the weekend"""
-    self.r_date = self.r_date - timedelta(days=value)
-
-    if self.r_date.weekday() == self.weekdays.index('Saturday'):
-      # subtract 1 day
-      result = (self.r_date + timedelta(days=returndates.minus1)).isoformat()
-      logger.debug(result)
-      return result
-    elif self.r_date.weekday() == self.weekdays.index('Sunday'):
-      # subtract 2 days
-      result = (self.r_date + timedelta(days=returndates.minus2)).isoformat()
-      logger.debug(result)
-      return result
+    try:
+      int(value) >= 0
+    except TypeError as e:
+      logger.error(e)
+    except ValueError as e:
+      logger.error(e)
     else:
-      # if not a weekend then date is returned as is
-      result = self.r_date.isoformat()
-      logger.debug(result)
-      return result
+      self.r_date = self.r_date - timedelta(days=value)
+      if self.r_date.weekday() == self.weekdays.index('Saturday'):
+        # subtract 1 day
+        result = (self.r_date + timedelta(days=returndates.minus1)).isoformat()
+        logger.debug(result)
+        return result
+      elif self.r_date.weekday() == self.weekdays.index('Sunday'):
+        # subtract 2 days
+        result = (self.r_date + timedelta(days=returndates.minus2)).isoformat()
+        logger.debug(result)
+        return result
+      else:
+        # if not a weekend then date is returned as is
+        result = self.r_date.isoformat()
+        logger.debug(result)
+        return result
 
   def nextbusinessdate(self, value=0):
     """ Returns next business date, skipping the weekend"""
-    self.r_date = self.r_date + timedelta(days=value)
-
-    if self.r_date.weekday() == self.weekdays.index('Saturday'):
-      # add 1 day
-      result = (self.r_date + timedelta(days=returndates.plus2)).isoformat()
-      logger.debug(result)
-      return result
-    elif self.r_date.weekday() == self.weekdays.index('Sunday'):
-      # add 2 days
-      result = (self.r_date + timedelta(days=returndates.plus1)).isoformat()
-      logger.debug(result)
-      return result
+    try:
+      int(value) >= 0
+    except TypeError as e:
+      logger.error(e)
+    except ValueError as e:
+      logger.error(e)
     else:
-      # if not a weekend then date is returned as is
-      result = self.r_date.isoformat()
-      logger.debug(result)
-      return result
+      self.r_date = self.r_date + timedelta(days=value)
+      if self.r_date.weekday() == self.weekdays.index('Saturday'):
+        # add 1 day
+        result = (self.r_date + timedelta(days=returndates.plus2)).isoformat()
+        logger.debug(result)
+        return result
+      elif self.r_date.weekday() == self.weekdays.index('Sunday'):
+        # add 2 days
+        result = (self.r_date + timedelta(days=returndates.plus1)).isoformat()
+        logger.debug(result)
+        return result
+      else:
+        # if not a weekend then date is returned as is
+        result = self.r_date.isoformat()
+        logger.debug(result)
+        return result
 
   def firstdateofweek(self):
     """ returns a the first date of a given week determined by the date attribute passed in """
@@ -145,20 +157,29 @@ class returndates:
       Sunday = 6
     
     """
-    first_day_of_month = date(self.year, self.month, 1)
-    logger.debug(first_day_of_month)
-    if first_day_of_month.weekday() < day_of_week:
-      difference_of_days = abs(first_day_of_month.weekday() - day_of_week)
-      result = first_day_of_month + timedelta(days=difference_of_days)
-      logger.debug(result)
-      return result.isoformat()
-    elif first_day_of_month.weekday() == day_of_week:
-      return first_day_of_month.isoformat()
+    try:
+      int(day_of_week) in range(0,6)
+    except TypeError as e:
+      logger.error(e)
+    except IndexError as e:
+      logger.error(e)
+    except ValueError as e:
+      logger.error(e)
     else:
-      difference_of_days = first_day_of_month.weekday() - day_of_week
-      result = first_day_of_month + timedelta(days=number_of_days_in_a_week - difference_of_days)
-      logger.debug(result)
-      return result.isoformat()
+      first_day_of_month = date(self.year, self.month, 1)
+      logger.debug(first_day_of_month)
+      if first_day_of_month.weekday() < day_of_week:
+        difference_of_days = abs(first_day_of_month.weekday() - day_of_week)
+        result = first_day_of_month + timedelta(days=difference_of_days)
+        logger.debug(result)
+        return result.isoformat()
+      elif first_day_of_month.weekday() == day_of_week:
+        return first_day_of_month.isoformat()
+      else:
+        difference_of_days = first_day_of_month.weekday() - day_of_week
+        result = first_day_of_month + timedelta(days=number_of_days_in_a_week - difference_of_days)
+        logger.debug(result)
+        return result.isoformat()
 
   def firstdayofyear(self):
     """ returns the first day of year """
@@ -182,28 +203,37 @@ class returndates:
       Sunday = 6
     
     """
-    last_day_of_month = date(self.year, self.month, self.number_of_days_in_a_month)
-    day_of_week -= 1
-    logger.debug(last_day_of_month)
-    print(last_day_of_month.weekday())
-    if last_day_of_month.weekday() > day_of_week:
-      difference_of_days = last_day_of_month.weekday() - day_of_week
-      result = last_day_of_month - timedelta(days=difference_of_days)
-      logger.debug(result)
-      return result.isoformat()
-    elif last_day_of_month.weekday() == day_of_week:
-      return last_day_of_month.isoformat()
+    try:
+      int(day_of_week) in range(0,6)
+    except TypeError as e:
+      logger.error(e)
+    except ValueError as e:
+      logger.error(e)
+    except IndexError as e:
+      logger.error(e)
     else:
-      difference_of_days = day_of_week - last_day_of_month.weekday()
-      result = last_day_of_month - timedelta(days=number_of_days_in_a_week - difference_of_days)
-      logger.debug(result)
-      return result.isoformat()
+      last_day_of_month = date(self.year, self.month, self.number_of_days_in_a_month)
+      day_of_week -= 1
+      logger.debug(last_day_of_month)
+      print(last_day_of_month.weekday())
+      if last_day_of_month.weekday() > day_of_week:
+        difference_of_days = last_day_of_month.weekday() - day_of_week
+        result = last_day_of_month - timedelta(days=difference_of_days)
+        logger.debug(result)
+        return result.isoformat()
+      elif last_day_of_month.weekday() == day_of_week:
+        return last_day_of_month.isoformat()
+      else:
+        difference_of_days = day_of_week - last_day_of_month.weekday()
+        result = last_day_of_month - timedelta(days=number_of_days_in_a_week - difference_of_days)
+        logger.debug(result)
+        return result.isoformat()
 
-  def lastdayofyear(self):
-    """ returns the last day of the year """
-    result = date(self.year,12,31).weekday()
-    logger.debug(result)
-    return self.weekdays[result]
+    def lastdayofyear(self):
+      """ returns the last day of the year """
+      result = date(self.year,12,31).weekday()
+      logger.debug(result)
+      return self.weekdays[result]
         
   def daystoendofyear(self):
     """ returns the number of days until the end of the year """
