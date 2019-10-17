@@ -110,5 +110,7 @@ dmypy.json
 /.vscode
 *.code-workspace
 test.*
+temp.*
+tmp.*
 
 # End of https://www.gitignore.io/api/python
