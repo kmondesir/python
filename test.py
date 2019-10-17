@@ -3,4 +3,4 @@ from datetime import date
 
 result = md.returndates()
 
-print(result.previousbusinessdate(15))
+print(result.previousbusinessdate(30))
