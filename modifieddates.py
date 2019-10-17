@@ -66,7 +66,8 @@ class returndates:
     except Exception as e:
       logger.error(e)
     else:
-      logger.debug(self.r_date)
+      result = self.r_date
+      logger.debug(result)
 
   def previousbusinessdate(self, value=0):
     """ Returns previous business date, skipping the weekend"""
@@ -128,7 +129,9 @@ class returndates:
       logger.debug(result)
       return result
     else:
-      return self.r_date.isoformat()
+      result = self.r_date.isoformat()
+      logger.debug(result)
+      return result
 
   def lastdateofweek(self):
     """ returns a the last date of a given week determined by the date attribute passed in """
@@ -139,7 +142,8 @@ class returndates:
       logger.debug(result)
       return result
     else:
-      return self.r_date.isoformat()
+      result = self.r_date.isoformat()
+      return result
                 
   def firstdayofmonth(self, day_of_week):
     """ returns the first day of the month 
@@ -218,16 +222,18 @@ class returndates:
       print(last_day_of_month.weekday())
       if last_day_of_month.weekday() > day_of_week:
         difference_of_days = last_day_of_month.weekday() - day_of_week
-        result = last_day_of_month - timedelta(days=difference_of_days)
+        result = (last_day_of_month - timedelta(days=difference_of_days)).isoformat()
         logger.debug(result)
-        return result.isoformat()
+        return result
       elif last_day_of_month.weekday() == day_of_week:
-        return last_day_of_month.isoformat()
+        result = last_day_of_month.isoformat()
+        logger.debug(result)
+        return result
       else:
         difference_of_days = day_of_week - last_day_of_month.weekday()
-        result = last_day_of_month - timedelta(days=number_of_days_in_a_week - difference_of_days)
+        result = (last_day_of_month - timedelta(days=number_of_days_in_a_week - difference_of_days)).isoformat()
         logger.debug(result)
-        return result.isoformat()
+        return result
 
     def lastdayofyear(self):
       """ returns the last day of the year """
@@ -267,8 +273,12 @@ class returndates:
 
   def whatweek(self):
     """ returns the week number of the date object """
-    return self.week
+    result = self.week
+    logger.debug(result)
+    return result
 
   def __str__(self):
     """ returns string of r_date in iso standard format """
-    return str(self.r_date.isoformat())
+    result = self.r_date.isoformat()
+    logger.debug(result)
+    return result
