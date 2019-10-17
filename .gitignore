@@ -107,6 +107,8 @@ dmypy.json
 .pyre/
 
 # Custom items
+# http://www.codeblocq.com/2016/01/Untrack-files-already-added-to-git-repository-based-on-gitignore/
+
 /.vscode
 *.code-workspace
 test.*
