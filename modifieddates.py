@@ -52,7 +52,7 @@ class returndates:
       self.year = year
       self.month = r_date.month
       self.week = week_num
-      self.day = dow
+      self.day = dow - 1
       self.number_of_days_in_a_month = cal.monthrange(self.year, self.month)[1]
       self.r_date = r_date
     except TypeError as e:
@@ -110,7 +110,7 @@ class returndates:
 
   def firstdateofweek(self):
     """ returns a the first date of a given week determined by the date attribute passed in """
-    number_of_days_from_first_day_of_week = self.day - 1
+    number_of_days_from_first_day_of_week = self.day
     if self.day > 0:
       result = (self.r_date - timedelta(days=number_of_days_from_first_day_of_week)).isoformat()
       logger.debug(result)
@@ -121,7 +121,7 @@ class returndates:
   def lastdateofweek(self):
     """ returns a the last date of a given week determined by the date attribute passed in """
     length = number_of_days_in_a_week
-    number_of_days_from_last_day_of_week = length - self.day
+    number_of_days_from_last_day_of_week = length - self.day - 1
     if self.day < length:
       result = (self.r_date + timedelta(days=number_of_days_from_last_day_of_week)).isoformat()
       logger.debug(result)
@@ -231,7 +231,7 @@ class returndates:
 
   def whatdayofweek(self):
     """ returns the full name of the day of the week """
-    result = self.weekdays[self.day - 1]
+    result = self.weekdays[self.day]
     logger.debug(result)
     return result
 
