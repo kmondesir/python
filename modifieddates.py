@@ -152,7 +152,7 @@ class returndates:
       result = first_day_of_month + timedelta(days=difference_of_days)
       logger.debug(result)
       return result.isoformat()
-    elif first_day_of_month.weekday == day_of_week:
+    elif first_day_of_month.weekday() == day_of_week:
       return first_day_of_month.isoformat()
     else:
       difference_of_days = first_day_of_month.weekday() - day_of_week
@@ -191,7 +191,7 @@ class returndates:
       result = last_day_of_month - timedelta(days=difference_of_days)
       logger.debug(result)
       return result.isoformat()
-    elif last_day_of_month == day_of_week:
+    elif last_day_of_month.weekday() == day_of_week:
       return last_day_of_month.isoformat()
     else:
       difference_of_days = day_of_week - last_day_of_month.weekday()
