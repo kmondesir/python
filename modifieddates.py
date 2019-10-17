@@ -260,7 +260,7 @@ class returndates:
     return result
 
   def whatday(self):
-    """ returns day number for the date object """ 
+    """ returns day number for the year """ 
     result = date(self.year,1,1) - self.r_date 
     logger.debug(result)
     return abs(result.days) + 1
@@ -272,7 +272,7 @@ class returndates:
     return result
 
   def whatweek(self):
-    """ returns the week number of the date object """
+    """ returns the week number of the year """
     result = self.week
     logger.debug(result)
     return result
