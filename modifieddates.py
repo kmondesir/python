@@ -285,6 +285,6 @@ class returndates:
 
   def __repr__(self):
     """ returns string of r_date in iso standard format """
-    result = '{}(date({},{},{}))'.format(self.__class__.__,self.year, self.month, self.day) 
+    result = '{}(date({},{},{}))'.format(self.__class__.__name__,self.year, self.month, self.day) 
     logger.debug(result)
     return result
