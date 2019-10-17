@@ -107,7 +107,8 @@ dmypy.json
 .pyre/
 
 # Custom items
-.vscode
-.code-workspace
+/.vscode
+*.code-workspace
+test.*
 
 # End of https://www.gitignore.io/api/python

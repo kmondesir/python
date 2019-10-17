@@ -49,10 +49,10 @@ class returndates:
     try:
       # value is expressed as an integer representing days
       year,week_num,dow = r_date.isocalendar()
-      self.year = r_date.year
-      self.month = r_date.month - 1
-      self.day = r_date.day
+      self.year = year
+      self.month = r_date.month
       self.week = week_num
+      self.day = dow
       self.number_of_days_in_a_month = cal.monthrange(self.year, self.month)[1]
       self.r_date = r_date
     except TypeError as e:
@@ -110,8 +110,8 @@ class returndates:
 
   def firstdateofweek(self):
     """ returns a the first date of a given week determined by the date attribute passed in """
-    number_of_days_from_first_day_of_week = 0 + self.r_date.weekday()
-    if self.r_date.weekday() > 0:
+    number_of_days_from_first_day_of_week = 0 + self.day
+    if self.day > 0:
       result = (self.r_date - timedelta(days=number_of_days_from_first_day_of_week)).isoformat()
       logger.debug(result)
       return result
@@ -121,57 +121,113 @@ class returndates:
   def lastdateofweek(self):
     """ returns a the last date of a given week determined by the date attribute passed in """
     length = number_of_days_in_a_week - 1
-    number_of_days_from_last_day_of_week = length - self.r_date.weekday()
-    if self.r_date.weekday() < length:
+    number_of_days_from_last_day_of_week = length - self.day
+    if self.day < length:
       result = (self.r_date + timedelta(days=number_of_days_from_last_day_of_week)).isoformat()
       logger.debug(result)
       return result
     else:
       return self.r_date.isoformat()
                 
-  def firstdayofmonth(self):
-    """ returns the first day of the month """
-    result = date(self.r_date.year, self.r_date.month, 1)
-    return self.weekdays[result.weekday()]
+  def firstdayofmonth(self, day_of_week):
+    """ returns the first day of the month 
+    
+      takes 1 argument for the day of the week in integer format
+      
+      being zero based 
+      
+      Monday = 0
+      Tuesday = 1
+      Wednesday = 2
+      Thursday = 3
+      Friday = 4
+      Saturday = 5
+      Sunday = 6
+    
+    """
+    first_day_of_month = date(self.year, self.month, 1)
+    logger.debug(first_day_of_month)
+    if first_day_of_month.weekday() <= day_of_week:
+      difference_of_days = abs(first_day_of_month.weekday() - day_of_week)
+      result = first_day_of_month + timedelta(days=difference_of_days)
+      logger.debug(result)
+      return result.isoformat()
+    else:
+      difference_of_days = first_day_of_month.weekday() - day_of_week
+      result = first_day_of_month + timedelta(days=number_of_days_in_a_week - difference_of_days)
+      logger.debug(result)
+      return result.isoformat()
 
   def firstdayofyear(self):
     """ returns the first day of year """
-    result = date(self.r_date.year, 1, 1).weekday()
+    result = date(self.year, 1, 1).weekday()
+    logger.debug(result)
     return self.weekdays[result]
                 
-  def lastdayofmonth(self):
-    """ returns the last day of the month """
-    result = date(self.r_date.year, self.r_date.month, self.number_of_days_in_a_month).weekday()
-    return self.weekdays[result + 1]
+  def lastdayofmonth(self, day_of_week):
+    """ returns the last day of the month 
+    
+      takes 1 argument for the day of the week in integer format
+      
+      being zero based e.g 
+      
+      Monday = 0
+      Tuesday = 1
+      Wednesday = 2
+      Thursday = 3
+      Friday = 4
+      Saturday = 5
+      Sunday = 6
+    
+    """
+    last_day_of_month = date(self.year, self.month, self.number_of_days_in_a_month)
+    logger.debug(last_day_of_month)
+    print(last_day_of_month.weekday())
+    if last_day_of_month.weekday() >= day_of_week:
+      difference_of_days = last_day_of_month.weekday() - day_of_week
+      result = last_day_of_month - timedelta(days=difference_of_days)
+      logger.debug(result)
+      return result.isoformat()
+    else:
+      difference_of_days = day_of_week - last_day_of_month.weekday()
+      result = last_day_of_month - timedelta(days=number_of_days_in_a_week + difference_of_days)
+      logger.debug(result)
+      return result.isoformat()
 
   def lastdayofyear(self):
     """ returns the last day of the year """
-    result = date(self.r_date.year,12,31).weekday()
+    result = date(self.year,12,31).weekday()
+    logger.debug(result)
     return self.weekdays[result]
         
   def daystoendofyear(self):
     """ returns the number of days until the end of the year """
-    result = date(self.r_date.year,12,31) - self.r_date
+    result = date(self.year,12,31) - self.r_date
+    logger.debug(result)
     return result.days
 
   def daysfromthebeginningoftheyear(self):
     """ returns the number of days from the beginning of the year """ 
-    result = date(self.r_date.year,1,1) - self.r_date 
+    result = date(self.year,1,1) - self.r_date
+    logger.debug(result)
     return abs(result.days)
 
   def whatmonth(self):
     """ returns full name value of the month """ 
     result = self.months[self.month]
+    logger.debug(result)
     return result
 
   def whatday(self):
     """ returns day number for the date object """ 
-    result = date(self.r_date.year,1,1) - self.r_date 
+    result = date(self.year,1,1) - self.r_date 
+    logger.debug(result)
     return abs(result.days) + 1
 
   def whatdayofweek(self):
     """ returns the full name of the day of the week """
-    result = self.weekdays[self.r_date.weekday()]
+    result = self.weekdays[self.day]
+    logger.debug(result)
     return result
 
   def whatweek(self):
