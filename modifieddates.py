@@ -17,7 +17,7 @@ severity = {
 logger = log.getLogger(__name__)
 formatter = log.Formatter('timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
-file_handler = log.FileHandler('businessdate')
+file_handler = log.FileHandler(__file__.join('.log'))
 file_handler.setLevel(severity['INFO'])
 file_handler.setFormatter(formatter)
 
@@ -219,7 +219,6 @@ class returndates:
       last_day_of_month = date(self.year, self.month, self.number_of_days_in_a_month)
       day_of_week -= 1
       logger.debug(last_day_of_month)
-      print(last_day_of_month.weekday())
       if last_day_of_month.weekday() > day_of_week:
         difference_of_days = last_day_of_month.weekday() - day_of_week
         result = (last_day_of_month - timedelta(days=difference_of_days)).isoformat()
