@@ -234,11 +234,11 @@ class returndates:
         logger.debug(result)
         return result
 
-    def lastdayofyear(self):
-      """ returns the last day of the year """
-      result = date(self.year,12,31).weekday()
-      logger.debug(result)
-      return self.weekdays[result]
+  def lastdayofyear(self):
+    """ returns the last day of the year """
+    result = date(self.year,12,31).weekday()
+    logger.debug(result)
+    return self.weekdays[result]
         
   def daystoendofyear(self):
     """ returns the number of days until the end of the year """
