@@ -30,10 +30,10 @@ stream_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
-class queries:
+class connections:
 
   """
-  Creates a connection string and provides CRUD methods for data manipulation
+  Creates a connection string 
 
   This video demostrates how to connect to SQL with Python using the pyodbc class, 
   this may not be the best way to connect but its the simplest to understand
@@ -41,75 +41,104 @@ class queries:
   https://www.youtube.com/watch?v=aF552bMEcO4
   """
 
-drivers = {
-    'MS_ACCESS': 'Microsoft Access Driver (*.mdb, *.accdb)',
-            'MS_SQL': 'SQL Server',
-            'MY_SQL': 'MySQL ODBC 3.51 Driver',
-            'ORACLE': 'Oracle in OraClient11g_home1',
-            'MARIADB': 'MariaDB Connector/C 3.1',
-            'POSTGRESQL': 'PostgreSQL Unicode'
-}
+  drivers = {
+      'MS_ACCESS': 'Microsoft Access Driver (*.mdb, *.accdb)',
+              'MS_SQL': 'SQL Server',
+              'MY_SQL': 'MySQL ODBC 3.51 Driver',
+              'ORACLE': 'Oracle in OraClient11g_home1',
+              'MARIADB': 'MariaDB Connector/C 3.1',
+              'POSTGRESQL': 'PostgreSQL Unicode'
+  }
 
-conn = None
+  conn = None
 
-def __init__(self, driver, server, database, trusted='yes'):
-  self.driver = '{' + driver + '}'
-  self.server = server
-  self.database = database
-  self.trusted = trusted
-  try:
-    pyodbc.connect(
-        "Driver={};Server={};Database={};Trusted_Connection={}".format(self.driver, self.server, self.database, self.trusted
-                                                                        ))
-  except pyodbc.Error as e:
-    sqlstate = e.args[1]
-    logger.warning(sqlstate)
-  else:
-    queries.conn = pyodbc.connect(
-        "Driver={};Server={};Database={};Trusted_Connection={}".format(self.driver, self.server, self.database, self.trusted))
+  def __init__(self, driver, server, trusted='yes'):
+    self.driver = '{' & driver & '}'
+    self.server = server
+    self.trusted = trusted
+    try:
+      pyodbc.connect("Driver={};Server={};Trusted_Connection={}".format(self.driver, self.server, self.trusted))
+    except pyodbc.Error as e:
+      sqlstate = e.args[1]
+      logger.warning(sqlstate)
+    else:
+      connections.conn = pyodbc.connect("Driver={};Server={};Trusted_Connection={}".format(self.driver, self.server, self.trusted))
   
-def create(self, sql):
-  try:
+  def __repr__(self):
     pass
-  except pyodbc.Error as e:
-    sqlstate = e.args[1]
-    logger.warning(sqlstate)
-  else:
-    queries.conn.commit()
-  finally:
+  
+  def __str__(self):
     pass
+    
+class manipulations(connections):
+  
+  def __init__(self, database):
+    pass
+    
+  def insert(self, sql):
+    try:
+      pass
+    except pyodbc.Error as e:
+      sqlstate = e.args[1]
+      logger.warning(sqlstate)
+    else:
+      connections.conn.commit()
+    finally:
+      pass
 
-def read(self, sql):
-  # using self to provide the connection string it executes a query based on the SQL provided and returns a dataframe
-  try:
-    cursor = queries.conn.cursor()
-  except pyodbc.Error as e:
-    sqlstate = e.args[1]
-    logger.warning(sqlstate)
-  else:
-    return pd.read_sql(sql, cursor)
-  finally:
-    pass
+  def update(self, sql):
+    try:
+      pass
+    except pyodbc.Error as e:
+      sqlstate = e.args[1]
+      logger.warning(sqlstate)
+    else:
+      connections.conn.commit()
+    finally:
+      pass
 
-
-def update(self, sql):
-  try:
+  def delete(self, sql):
+    try:
+      pass
+    except pyodbc.Error as e:
+      sqlstate = e.args[1]
+      logger.warning(sqlstate)
+    else:
+      connections.conn.commit()
+    finally:
+      pass
+    
+  def merge(self, sql):
     pass
-  except pyodbc.Error as e:
-    sqlstate = e.args[1]
-    logger.warning(sqlstate)
-  else:
-    queries.conn.commit()
-  finally:
+  
+  def call(self, sql):
     pass
-
-def delete(self, sql):
-  try:
-    pass
-  except pyodbc.Error as e:
-    sqlstate = e.args[1]
-    logger.warning(sqlstate)
-  else:
-    queries.conn.commit()
-  finally:
-    pass
+    
+  class definitions(connections):
+    def __init__(self, database):
+      pass
+    
+    def create(self, sql):
+      pass
+    
+    def alter(self, sql):
+      pass
+    
+    def drop(self, sql):
+      pass
+    
+    def rename(self, sql):
+      pass
+    
+    def tuncate(self, sql):
+      pass
+    
+    def comment(self, sql):
+      pass
+    
+  class queries(connections):
+    def __init__(self, database):
+      pass
+    
+    def select(self, sql):
+      pass
