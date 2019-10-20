@@ -1,4 +1,6 @@
+import numpy
 import pandas as pd
+
 import os
 
 from lottery import winnings as wins
@@ -14,7 +16,7 @@ severity = {
 }
 
 logger = log.getLogger(__name__)
-formatter = log.Formatter('%(asctime)s:%(name)s:%(message)s')
+formatter = log.Formatter('timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
 file_handler = log.FileHandler("lottery_1.py")
 file_handler.setLevel(severity["INFO"])
@@ -125,12 +127,10 @@ new_numbers = list()
 global counter
 counter = 0
 
-while counter < 100:
+while counter < 20:
   result = generateRandomList() 
   if result not in list(df['Winning Numbers']):
     new_numbers.append(result)
     counter += 1
   else:
     pass
-
-enumerate()
