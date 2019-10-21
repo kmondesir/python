@@ -17,9 +17,10 @@ severity = {
 }
 
 logger = log.getLogger(__name__)
-formatter = log.Formatter('%(asctime)s:%(name)s:%(message)s')
+formatter = log.Formatter(
+    'timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
-file_handler = log.FileHandler('lottery')
+file_handler = log.FileHandler(__file__)
 file_handler.setLevel(severity['INFO'])
 file_handler.setFormatter(formatter)
 
