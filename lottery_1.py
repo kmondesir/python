@@ -131,6 +131,4 @@ while counter < 100:
     new_numbers.append(result)
     counter += 1
   else:
-    pass
-
-enumerate()
+    continue

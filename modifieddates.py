@@ -276,6 +276,18 @@ class returndates:
     logger.debug(result)
     return result
 
+  def yesterday(self):
+    """ returns the day before today """
+    result = date.today() - timedelta(days=1)
+    logger.debug(result)
+    return result
+
+  def tomorrow(self):
+    """ returns the day after today """
+    result = date.today() + timedelta(days=1)
+    logger.debug(result)
+    return result
+
   def __str__(self):
     """ returns string of r_date in iso standard format """
     result = self.r_date.isoformat()
