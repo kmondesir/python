@@ -1,5 +1,5 @@
 import pandas as pd
-from odata import ODataService as od
+# from odata import ODataService as od
 import os
 
 from lottery import winnings as wins
@@ -27,8 +27,8 @@ stream_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
-url = 'https://data.ny.gov/api/odata/v4/dg63-4siq'
-service = od(url, reflect_entities=True)
+# url = 'https://data.ny.gov/api/odata/v4/dg63-4siq'
+# service = od(url, reflect_entities=True)
 
 path = os.getcwd()
 print(path)
@@ -41,12 +41,11 @@ print(ABS_PATH)
 columns = ['Draw Date', 'Winning Numbers']
 
 df = pd.read_csv(ABS_PATH, usecols=columns)
-items = service.entities['Draw Date']
+# items = service.entities['Draw Date']
 
-query = service.query(items)
+# query = service.query(items)
 
-for item in query:
-    print(item.'Draw Date')
+
 
 global numbers
 
