@@ -132,4 +132,8 @@ while counter < 20:
     new_numbers.append(result)
     counter += 1
   else:
+<<<<<<< HEAD
     pass
+=======
+    continue
+>>>>>>> 940429159b68c582d49f136afdfa78309c0db3c4
