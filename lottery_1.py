@@ -111,13 +111,12 @@ df['average'] = average
 df['standard_d'] = standard_d
 df['variance'] = variance
 
-
 def generateRandomList(lower=84, upper=115):
   result = list()
   counter = 0
   while sum(result).__le__(lower) or sum(result).__ge__(upper):
     counter += 1
-    result = wins.generateRandomNumber()
+    result = wins.generateRandomNumber(5,1,39)
   else:
     return result
  

@@ -138,7 +138,7 @@ class winnings:
     seq = list(range(numbers))
     first = rand.randrange(1,9)
     seq[0] = first
-    last = rand.randrange(40,stop)
+    last = rand.randrange((stop-10),stop)
     seq[-1] = last
 
     counter = 1
@@ -154,7 +154,7 @@ class winnings:
     return sorted(seq)
 
   @staticmethod
-  def generateRandomList(lower=30, upper=100):
+  def generateRandomList(lower=30, upper=90):
     result = list()
     counter = 0
     while sum(result).__le__(lower) or sum(result).__ge__(upper):
