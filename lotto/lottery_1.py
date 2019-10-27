@@ -1,4 +1,4 @@
-import numpy
+
 import pandas as pd
 
 import os
@@ -132,4 +132,4 @@ while counter < 20:
     new_numbers.append(result)
     counter += 1
   else:
-    pass
+    continue
