@@ -29,7 +29,7 @@ stream_handler.setFormatter(formatter)
 
 logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
-class winnings:
+class lotto:
   """
   Performs various calculates on a series of numbers
 
