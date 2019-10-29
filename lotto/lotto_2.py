@@ -2,7 +2,7 @@ import pandas as pd
 import json
 import requests
 
-from lottery import winnings as wins
+from lottery import lotto as take5
 
 import logging as log
 severity = {
