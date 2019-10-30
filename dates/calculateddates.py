@@ -17,7 +17,7 @@ severity = {
 logger = log.getLogger(__name__)
 formatter = log.Formatter('timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
-file_handler = log.FileHandler(__file__)
+file_handler = log.FileHandler('calculatedates.log')
 file_handler.setLevel(severity['INFO'])
 file_handler.setFormatter(formatter)
 
