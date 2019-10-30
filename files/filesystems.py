@@ -46,7 +46,7 @@ class items:
     self.item = item
     self.fullpath = os.path.join(path, item)
     try:
-      os.path.exists(items.fullpath)
+      os.path.exists(self.fullpath)
     except IOError as e:
       logger.warning(e)
     except Exception as e:
@@ -82,9 +82,8 @@ class items:
     finally:
       f.close()
 
-
-def append(self, value):
-		# opens a file and appends data to it
+  def append(self, value):
+      # opens a file and appends data to it
     try:
       f = open(self.fullpath, 'a+')
     except PermissionError as e:
