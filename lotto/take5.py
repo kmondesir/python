@@ -30,7 +30,6 @@ logger.addHandler(stream_handler)
 response = requests.get("https://data.ny.gov/api/odata/v4/dg63-4siq")
 converted = json.loads(response.content)
 df = pd.DataFrame.from_dict(converted['value'], orient='columns')
+df['first digit'] = map(take5(x).getFirstNumber, df['winning_numbers'])
 
-df.aggregate([sum])
-
-print(df)
+print(df['first digit'])
