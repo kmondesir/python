@@ -38,13 +38,13 @@ class items:
   https://www.youtube.com/redirect?redir_token=tKiuOsI1ZF8oNIDLKASs2PhnbWZ8MTU3MDk5ODI1M0AxNTcwOTExODUz&q=https%3A%2F%2Fgithub.com%2FCoreyMSchafer%2Fcode_snippets%2Ftree%2Fmaster%2FPython-Context-Managers&v=-aKFBoZpiqA&event=video_description
   """
 
-  fullpath = None
+  
 
   def __init__(self, path=os.getcwd(), item=os.__file__):
     # tests whether the file exists and throws an error if not
     self.path = path
     self.item = item
-    items.fullpath = os.path.join(path, item)
+    self.fullpath = os.path.join(path, item)
     try:
       os.path.exists(items.fullpath)
     except IOError as e:
