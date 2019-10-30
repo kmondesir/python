@@ -69,6 +69,7 @@ class returndates:
       result = self.r_date
       logger.debug(result)
 
+
   def previousbusinessdate(self, value=0):
     """ Returns previous business date, skipping the weekend"""
     try:
@@ -94,6 +95,7 @@ class returndates:
         result = self.r_date.isoformat()
         logger.debug(result)
         return result
+
 
   def nextbusinessdate(self, value=0):
     """ Returns next business date, skipping the weekend"""
@@ -121,6 +123,7 @@ class returndates:
         logger.debug(result)
         return result
 
+
   def firstdateofweek(self):
     """ returns a the first date of a given week determined by the date attribute passed in """
     number_of_days_from_first_day_of_week = self.day
@@ -133,6 +136,7 @@ class returndates:
       logger.debug(result)
       return result
 
+
   def lastdateofweek(self):
     """ returns a the last date of a given week determined by the date attribute passed in """
     length = number_of_days_in_a_week
@@ -144,7 +148,8 @@ class returndates:
     else:
       result = self.r_date.isoformat()
       return result
-                
+
+
   def firstdayofmonth(self, day_of_week):
     """ returns the first day of the month 
     
@@ -185,12 +190,14 @@ class returndates:
         logger.debug(result)
         return result.isoformat()
 
+
   def firstdayofyear(self):
     """ returns the first day of year """
     result = date(self.year, 1, 1).weekday()
     logger.debug(result)
     return self.weekdays[result]
-                
+
+               
   def lastdayofmonth(self, day_of_week):
     """ returns the last day of the month 
     
@@ -234,17 +241,20 @@ class returndates:
         logger.debug(result)
         return result
 
+
   def lastdayofyear(self):
     """ returns the last day of the year """
     result = date(self.year,12,31).weekday()
     logger.debug(result)
     return self.weekdays[result]
-        
+    
+       
   def daystoendofyear(self):
     """ returns the number of days until the end of the year """
     result = date(self.year,12,31) - self.r_date
     logger.debug(result)
     return result.days
+
 
   def daysfromthebeginningoftheyear(self):
     """ returns the number of days from the beginning of the year """ 
@@ -252,11 +262,13 @@ class returndates:
     logger.debug(result)
     return abs(result.days)
 
+
   def whatmonth(self):
     """ returns full name value of the month """ 
     result = self.months[self.month]
     logger.debug(result)
     return result
+
 
   def whatday(self):
     """ returns day number for the year """ 
@@ -264,17 +276,20 @@ class returndates:
     logger.debug(result)
     return abs(result.days) + 1
 
+
   def whatdayofweek(self):
     """ returns the full name of the day of the week """
     result = self.weekdays[self.day]
     logger.debug(result)
     return result
 
+
   def whatweek(self):
     """ returns the week number of the year """
     result = self.week
     logger.debug(result)
     return result
+
 
   @staticmethod
   def yesterday():
@@ -283,6 +298,7 @@ class returndates:
     logger.debug(result)
     return result.isoformat()
 
+
   @staticmethod
   def tomorrow():
     """ returns the day after today """
@@ -290,11 +306,13 @@ class returndates:
     logger.debug(result)
     return result.isoformat()
 
+
   def __str__(self):
     """ returns string of r_date in iso standard format """
     result = self.r_date.isoformat()
     logger.debug(result)
     return result
+
 
   def __repr__(self):
     """ Doesn't work but might be cool """
