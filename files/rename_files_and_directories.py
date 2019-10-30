@@ -10,12 +10,14 @@ d = 0
 print(directory)
 print(chars)
 
+
 def matchSpecialChars(value):
   pattern = re.compile(chars)
   if pattern.search(value) == None:
     return False
   else:
     return True
+
 
 def replaceSpecialCharsWithUnderScores(value):
   replacement = re.sub(chars,'_',value)
