@@ -80,36 +80,42 @@ class manipulations(connections):
     
   def insert(self, sql):
     try:
-      pass
+      cursor = self.connect.cursor()
+      cursor.execute(sql)
     except pyodbc.Error as e:
       sqlstate = e.args[1]
       logger.warning(sqlstate)
     else:
       self.connect.commit()
     finally:
-      pass
+      cursor = None
+      self.connect = None
 
   def update(self, sql):
     try:
-      pass
+      cursor = self.connect.cursor()
+      cursor.execute(sql)
     except pyodbc.Error as e:
       sqlstate = e.args[1]
       logger.warning(sqlstate)
     else:
       self.connect.commit()
     finally:
-      pass
+      self.connect = None
+      cursor = None
 
   def delete(self, sql):
     try:
-      pass
+      cursor = self.connect.cursor()
+      cursor.execute(sql)
     except pyodbc.Error as e:
       sqlstate = e.args[1]
       logger.warning(sqlstate)
     else:
       self.connect.commit()
     finally:
-      pass
+      self.connect = None
+      cursor = None
     
   def merge(self, sql):
     pass
@@ -156,9 +162,10 @@ class manipulations(connections):
     def select(self, sql):
       try:
         cursor = self.connect.cursor()
-        
+        cursor.execute(sql)
       except pyodbc.Error as e:
         sqlstate = e.args[1]
         logger.warning(sqlstate)
       else:
-        pass
+        rows = list(cursor.fetchall())
+        return rows
