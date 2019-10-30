@@ -20,7 +20,7 @@ severity = {
 logger = log.getLogger(__name__)
 formatter = log.Formatter('timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
-file_handler = log.FileHandler(__file__)
+file_handler = log.FileHandler('databases.log')
 file_handler.setLevel(severity['INFO'])
 file_handler.setFormatter(formatter)
 
@@ -50,9 +50,7 @@ class connections:
               'POSTGRESQL': 'PostgreSQL Unicode'
   }
 
-  conn = None
-
-  def __init__(self, driver, server, trusted='yes'):
+  def __init__(self, driver=drivers['MY_SQL'], server='127.0.0.1', trusted='yes'):
     self.driver = '{' & driver & '}'
     self.server = server
     self.trusted = trusted
@@ -62,7 +60,7 @@ class connections:
       sqlstate = e.args[1]
       logger.warning(sqlstate)
     else:
-      connections.conn = pyodbc.connect("Driver={};Server={};Trusted_Connection={}".format(self.driver, self.server, self.trusted))
+      self.connect = pyodbc.connect("Driver={};Server={};Trusted_Connection={}".format(self.driver, self.server, self.trusted))
   
   def __repr__(self):
     pass
@@ -72,8 +70,11 @@ class connections:
     
 class manipulations(connections):
   
-  def __init__(self, database):
-    pass
+  def __init__(self, driver, server, trusted, database):
+    # https://www.youtube.com/watch?v=RSl87lqOXDE&t=100s 
+    super().__init__(driver, server, trusted)
+    self.database = "Database={}".format(database)
+    self.connect += ";".join(self.database)
     
   def insert(self, sql):
     try:
@@ -115,8 +116,9 @@ class manipulations(connections):
     pass
     
   class definitions(connections):
-    def __init__(self, database):
-      pass
+    def __init__(self, driver, server, trusted, database):
+      self.database = "Database={}".format(database)
+      self.connect += ";".join(self.database)
     
     def create(self, sql):
       pass
@@ -137,8 +139,9 @@ class manipulations(connections):
       pass
     
   class queries(connections):
-    def __init__(self, database):
-      pass
+    def __init__(self, driver, server, trusted, database):
+      self.database = "Database={}".format(database)
+      self.connect += ";".join(self.database)
     
     def select(self, sql):
       pass
