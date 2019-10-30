@@ -27,7 +27,7 @@ stream_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
-class opening:
+class items:
 
   """
   Opens a file for reading from or writing to
@@ -44,9 +44,9 @@ class opening:
     # tests whether the file exists and throws an error if not
     self.path = path
     self.item = item
-    opening.fullpath = os.path.join(path, item)
+    items.fullpath = os.path.join(path, item)
     try:
-      os.path.exists(opening.fullpath)
+      os.path.exists(items.fullpath)
     except IOError as e:
       logger.warning(e)
     except Exception as e:
@@ -55,7 +55,7 @@ class opening:
   def read(self):
     # open a file and returns its contents to the caller
     try:
-      f = open(opening.fullpath, 'r+')
+      f = open(self.fullpath, 'r+')
     except PermissionError as e:
       logger.warning(e)
     except IOError as e:
@@ -70,7 +70,7 @@ class opening:
   def write(self, value):
     # opens a file and writes to it
     try:
-      f = open(opening.fullpath, 'w+')
+      f = open(self.fullpath, 'w+')
     except PermissionError as e:
       logger.warning(e)
     except IOError as e:
@@ -86,7 +86,7 @@ class opening:
 def append(self, value):
 		# opens a file and appends data to it
     try:
-      f = open(opening.fullpath, 'a+')
+      f = open(self.fullpath, 'a+')
     except PermissionError as e:
       logger.warning(e)
     except IOError as e:
