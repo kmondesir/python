@@ -15,9 +15,9 @@ severity = {
 }
 
 logger = log.getLogger(__name__)
-formatter = log.Formatter('%(asctime)s:%(name)s:%(message)s')
+formatter = log.Formatter('timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
-file_handler = log.FileHandler("filesystems.py")
+file_handler = log.FileHandler(__file__)
 file_handler.setLevel(severity["|DEBUG,INFO,WARNING|"])
 file_handler.setFormatter(formatter)
 
@@ -46,7 +46,7 @@ class opening:
     self.item = item
     self.fullpath = os.path.join(path, item)
     try:
-      os.path.exists(opening.fullpath)
+      os.path.exists(self.fullpath)
     except IOError as e:
       logger.warning(e)
     except Exception as e:
