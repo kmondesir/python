@@ -50,17 +50,17 @@ class connections:
               'POSTGRESQL': 'PostgreSQL Unicode'
   }
 
-  def __init__(self, driver=drivers['MY_SQL'], server='127.0.0.1', trusted='yes'):
+  def __init__(self, driver=drivers['MS_SQL'], server='127.0.0.1', trusted='yes'):
     self.driver = '{' & driver & '}'
     self.server = server
     self.trusted = trusted
     try:
-      pyodbc.connect("Driver={};Server={};Trusted_Connection={}".format(self.driver, self.server, self.trusted))
+      self.connect = pyodbc.connect("Driver={};Server={};Trusted_Connection={}".format(self.driver, self.server, self.trusted))
     except pyodbc.Error as e:
       sqlstate = e.args[1]
       logger.warning(sqlstate)
     else:
-      self.connect = pyodbc.connect("Driver={};Server={};Trusted_Connection={}".format(self.driver, self.server, self.trusted))
+      result = self.connect
   
   def __repr__(self):
     pass
@@ -70,11 +70,13 @@ class connections:
     
 class manipulations(connections):
   
-  def __init__(self, driver, server, trusted, database):
+  def __init__(self, driver, server, trusted, database, user, password):
     # https://www.youtube.com/watch?v=RSl87lqOXDE&t=100s 
     super().__init__(driver, server, trusted)
     self.database = "Database={}".format(database)
-    self.connect += ";".join(self.database)
+    self.user = "UID={}".format(user)
+    self.password = "PWD={}".format(password)
+    self.connect += ";".join(self.database,';',self.user,';',self.password)
     
   def insert(self, sql):
     try:
@@ -83,7 +85,7 @@ class manipulations(connections):
       sqlstate = e.args[1]
       logger.warning(sqlstate)
     else:
-      connections.conn.commit()
+      self.connect.commit()
     finally:
       pass
 
@@ -94,7 +96,7 @@ class manipulations(connections):
       sqlstate = e.args[1]
       logger.warning(sqlstate)
     else:
-      connections.conn.commit()
+      self.connect.commit()
     finally:
       pass
 
@@ -105,7 +107,7 @@ class manipulations(connections):
       sqlstate = e.args[1]
       logger.warning(sqlstate)
     else:
-      connections.conn.commit()
+      self.connect.commit()
     finally:
       pass
     
@@ -114,11 +116,15 @@ class manipulations(connections):
   
   def call(self, sql):
     pass
-    
+   
   class definitions(connections):
-    def __init__(self, driver, server, trusted, database):
+
+    def __init__(self, driver, server, trusted, database, user, password):
+      super().__init__(driver, server, trusted)
       self.database = "Database={}".format(database)
-      self.connect += ";".join(self.database)
+      self.user = "UID={}".format(user)
+      self.password = "PWD={}".format(password)
+      self.connect += ";".join(self.database,';',self.user,';',self.password)
     
     def create(self, sql):
       pass
@@ -139,9 +145,20 @@ class manipulations(connections):
       pass
     
   class queries(connections):
-    def __init__(self, driver, server, trusted, database):
+    
+    def __init__(self, driver, server, trusted, database, user, password):
+      super().__init__(driver, server, trusted)
       self.database = "Database={}".format(database)
-      self.connect += ";".join(self.database)
+      self.user = "UID={}".format(user)
+      self.password = "PWD={}".format(password)
+      self.connect += ";".join(self.database,';',self.user,';',self.password)
     
     def select(self, sql):
-      pass
+      try:
+        cursor = self.connect.cursor()
+        
+      except pyodbc.Error as e:
+        sqlstate = e.args[1]
+        logger.warning(sqlstate)
+      else:
+        pass
