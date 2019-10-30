@@ -38,8 +38,7 @@ df['first digit'] = list(map(lambda x: take5(x).getFirstNumber(), df['winning_nu
 df['last digit'] = list(map(lambda x: take5(x).getLastNumber(), df['winning_numbers']))
 
 df['first odd digit'] = list(map(lambda x: take5(x).firstOdd(), df['winning_numbers']))
-df['last odd digit'] = list(map(lambda x: take5(
-    x).lastOdd(), df['winning_numbers']))
+df['last odd digit'] = list(map(lambda x: take5(x).lastOdd(), df['winning_numbers']))
 df['mostly odd'] = list(map(lambda x: take5(x).isMostlyOdd, df['winning_numbers']))
 df['first digit less than 10'] = list(map(lambda x: take5(x).isFirstDigitSingle(), df['winning_numbers']))
 df['first digit greater than 9'] = list(map(lambda x: take5(x).isFirstDigitDouble(), df['winning_numbers']))
