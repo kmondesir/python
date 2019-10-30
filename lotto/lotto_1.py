@@ -3,7 +3,7 @@ import pandas as pd
 
 import os
 
-from lottery import winnings as wins
+from lottery import lotto as take5
 
 import logging as log
 severity = {
