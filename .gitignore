@@ -114,5 +114,6 @@ dmypy.json
 test*
 temp*
 tmp*
+*.log
 
 # End of https://www.gitignore.io/api/python
