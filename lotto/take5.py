@@ -29,7 +29,7 @@ stream_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
-
+arguments = {'$limits:':'40000'}
 response = requests.get("https://data.ny.gov/api/odata/v4/dg63-4siq")
 converted = json.loads(response.content)
 df = pd.DataFrame.from_dict(converted['value'], orient='columns')
