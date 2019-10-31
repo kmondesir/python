@@ -63,8 +63,6 @@ class items:
       logger.warning(e)
     else:
       return f
-    finally:
-      f.close()
 
 
   def write(self, value):

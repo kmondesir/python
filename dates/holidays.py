@@ -1,11 +1,12 @@
-from modifieddates import returndates as rd
+from python.dates.calculateddates import returndates as rd
+import datetime as dt
 
 class holidays(rd):
   
   def __init__(self, r_date, title):
     
     super().__init__(r_date)
-    
+    self.title = title
     self.us = {
       'New Years':0,
       'Martin Luther King':0,
