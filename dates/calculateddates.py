@@ -245,8 +245,8 @@ class returndates:
 
   def lastdayofyear(self):
     """ returns the last day of the year """
-    result = date(self.year,12,31).weekday()
-     logger.debug(result)
+    result = date(self.year,12,31).weekday())
+    logger.debug(result)
     return self.weekdays[result]
     
        
