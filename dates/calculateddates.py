@@ -251,6 +251,12 @@ class returndates:
     result = date(self.year,1,1) - self.r_date
     logger.debug(result)
     return abs(result.days)
+  
+  def whatyear(self):
+    """ returns the year associated with the date provided """
+    result = self.year
+    logger.debug(result)
+    return result
 
   def whatmonth(self):
     """ returns full name value of the month """ 
