@@ -149,8 +149,7 @@ class returndates:
       result = self.r_date.isoformat()
       return result
 
-
-  def firstdayofmonth(self, day_of_week):
+  def firstdayofmonth(self, year, month, day_of_week):
     """ returns the first day of the month 
     
       takes 1 argument for the day of the week in integer format
@@ -175,7 +174,7 @@ class returndates:
     except ValueError as e:
       logger.error(e)
     else:
-      first_day_of_month = date(self.year, self.month, 1)
+      first_day_of_month = date(year, month, 1)
       logger.debug(first_day_of_month)
       if first_day_of_month.weekday() < day_of_week:
         difference_of_days = abs(first_day_of_month.weekday() - day_of_week)
@@ -198,7 +197,7 @@ class returndates:
     return self.weekdays[result]
 
                
-  def lastdayofmonth(self, day_of_week):
+  def lastdayofmonth(self, year, month, day_of_week):
     """ returns the last day of the month 
     
       takes 1 argument for the day of the week in integer format
@@ -214,8 +213,10 @@ class returndates:
       Sunday = 6
     
     """
+    
     try:
       int(day_of_week) in range(0,6)
+      last_day = cal.monthrange(year, month)[1]
     except TypeError as e:
       logger.error(e)
     except ValueError as e:
@@ -223,9 +224,9 @@ class returndates:
     except IndexError as e:
       logger.error(e)
     else:
-      last_day_of_month = date(self.year, self.month, self.number_of_days_in_a_month)
+      last_day_of_month = date(year, month, last_day)
       day_of_week -= 1
-      logger.debug(last_day_of_month)
+      logger.debug(last_day)
       if last_day_of_month.weekday() > day_of_week:
         difference_of_days = last_day_of_month.weekday() - day_of_week
         result = (last_day_of_month - timedelta(days=difference_of_days)).isoformat()
@@ -245,7 +246,7 @@ class returndates:
   def lastdayofyear(self):
     """ returns the last day of the year """
     result = date(self.year,12,31).weekday()
-    logger.debug(result)
+     logger.debug(result)
     return self.weekdays[result]
     
        
