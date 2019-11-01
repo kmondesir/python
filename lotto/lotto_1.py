@@ -1,8 +1,13 @@
+
 import pandas as pd
+<<<<<<< HEAD:lottery_1.py
 # from odata import ODataService as od
+=======
+
+>>>>>>> 495565bd4e5c65c5e8cc1edafe26c1f5b1184503:lotto/lotto_1.py
 import os
 
-from lottery import winnings as wins
+from lottery import lotto as take5
 
 import logging as log
 severity = {
@@ -118,13 +123,12 @@ df['average'] = average
 df['standard_d'] = standard_d
 df['variance'] = variance
 
-
 def generateRandomList(lower=84, upper=115):
   result = list()
   counter = 0
   while sum(result).__le__(lower) or sum(result).__ge__(upper):
     counter += 1
-    result = wins.generateRandomNumber()
+    result = wins.generateRandomNumber(5,1,39)
   else:
     return result
  
@@ -134,7 +138,7 @@ new_numbers = list()
 global counter
 counter = 0
 
-while counter < 100:
+while counter < 20:
   result = generateRandomList() 
   if result not in list(df['Winning Numbers']):
     new_numbers.append(result)

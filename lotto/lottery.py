@@ -6,6 +6,7 @@ import logging as log
 import random as rand
 import statistics as stat
 from datetime import datetime as dt
+import os
 
 severity = {
     'CRITICAL': 50,
@@ -16,30 +17,30 @@ severity = {
     'NOTSET': 0,
 }
 
+thisfile = __file__
 logger = log.getLogger(__name__)
-formatter = log.Formatter(
-    'timestamp:%(asctime)s module:%(name)s message:%(message)s')
+formatter = log.Formatter('timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
-file_handler = log.FileHandler(__file__)
+file_handler = log.FileHandler('lottery.log')
 file_handler.setLevel(severity['INFO'])
 file_handler.setFormatter(formatter)
 
-stream_handler = log.StreamHandler()
-stream_handler.setFormatter(formatter)
+# stream_handler = log.StreamHandler()
+# stream_handler.setFormatter(formatter)
 
 logger.addHandler(file_handler)
-logger.addHandler(stream_handler)
-class winnings:
+# logger.addHandler(stream_handler)
+class lotto:
   """
   Performs various calculates on a series of numbers
 
   https://stackoverflow.com/questions/12906402/type-object-datetime-datetime-has-no-attribute-datetime
   """
-  def __init__(self, draw_date, draw_numbers):
+  def __init__(self, draw_numbers, draw_date=dt.today()):
   
     try:  
-      self.draw_date = dt.strptime(draw_date, '%m/%d/%Y')
       self.draw_numbers = list(map(int, draw_numbers.split()))
+      self.draw_date = dt.strptime(draw_date, '%m/%d/%Y')
     except TypeError as e:
       logger.error(e)
     except ValueError as e:
@@ -49,8 +50,9 @@ class winnings:
     except Exception as e:
       logger.error(e)
     else:
-      logger.debug(self.draw_date)
-      logger.debug(self.draw_numbers)
+      pass
+      # logger.debug(self.draw_date)
+      # logger.debug(self.draw_numbers)
     
   def firstOdd(self):
     # Returns True if the first digit is odd
@@ -138,7 +140,7 @@ class winnings:
     seq = list(range(numbers))
     first = rand.randrange(1,9)
     seq[0] = first
-    last = rand.randrange(40,stop)
+    last = rand.randrange((stop-10),stop)
     seq[-1] = last
 
     counter = 1
@@ -154,11 +156,11 @@ class winnings:
     return sorted(seq)
 
   @staticmethod
-  def generateRandomList(lower=30, upper=100):
+  def generateRandomList(lower=30, upper=90):
     result = list()
     counter = 0
     while sum(result).__le__(lower) or sum(result).__ge__(upper):
       counter += 1
-      result = winnings.generateRandomNumber()
+      result = lotto.generateRandomNumber()
     else:
       return result
