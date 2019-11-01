@@ -3,7 +3,7 @@ import pandas as pd
 
 import os
 
-from lottery import lotto as take5
+from lottery import lotto as t5
 
 import logging as log
 severity = {
@@ -18,7 +18,7 @@ severity = {
 logger = log.getLogger(__name__)
 formatter = log.Formatter('timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
-file_handler = log.FileHandler("lottery_1.py")
+file_handler = log.FileHandler("lotto_1.log")
 file_handler.setLevel(severity["INFO"])
 file_handler.setFormatter(formatter)
 
@@ -77,7 +77,7 @@ standard_d = []
 variance = []
 
 for index, row in df.iterrows():
-  numbers.append(take5(str(row['Draw Date']),str(row['Winning Numbers'])))
+  numbers.append(t5(str(row['Winning Numbers']),str(row['Draw Date'])))
 
 for i in numbers:
 
@@ -116,7 +116,7 @@ def generateRandomList(lower=84, upper=115):
   counter = 0
   while sum(result).__le__(lower) or sum(result).__ge__(upper):
     counter += 1
-    result = take5.generateRandomNumber(5,1,39)
+    result = t5.generateRandomNumber(5,1,39)
   else:
     return result
  
@@ -126,7 +126,7 @@ new_numbers = list()
 global counter
 counter = 0
 
-while counter < 10:
+while counter < 50:
   result = generateRandomList() 
   if result not in list(df['Winning Numbers']):
     new_numbers.append(result)
