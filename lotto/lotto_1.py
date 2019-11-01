@@ -77,7 +77,7 @@ standard_d = []
 variance = []
 
 for index, row in df.iterrows():
-  numbers.append(wins(str(row['Draw Date']),str(row['Winning Numbers'])))
+  numbers.append(take5(str(row['Draw Date']),str(row['Winning Numbers'])))
 
 for i in numbers:
 
@@ -116,7 +116,7 @@ def generateRandomList(lower=84, upper=115):
   counter = 0
   while sum(result).__le__(lower) or sum(result).__ge__(upper):
     counter += 1
-    result = wins.generateRandomNumber(5,1,39)
+    result = take5.generateRandomNumber(5,1,39)
   else:
     return result
  
@@ -126,10 +126,12 @@ new_numbers = list()
 global counter
 counter = 0
 
-while counter < 20:
+while counter < 10:
   result = generateRandomList() 
   if result not in list(df['Winning Numbers']):
     new_numbers.append(result)
     counter += 1
   else:
     continue
+  
+  print(new_numbers)
