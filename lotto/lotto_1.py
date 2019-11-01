@@ -1,13 +1,8 @@
 
 import pandas as pd
-<<<<<<< HEAD:lottery_1.py
-# from odata import ODataService as od
-=======
-
->>>>>>> 495565bd4e5c65c5e8cc1edafe26c1f5b1184503:lotto/lotto_1.py
 import os
 
-from lottery import lotto as take5
+from lottery import lotto as t5
 
 import logging as log
 severity = {
@@ -89,7 +84,7 @@ standard_d = []
 variance = []
 
 for index, row in df.iterrows():
-  numbers.append(wins(str(row['Draw Date']),str(row['Winning Numbers'])))
+  numbers.append(t5(str(row['Winning Numbers']),str(row['Draw Date'])))
 
 for i in numbers:
 
@@ -128,7 +123,7 @@ def generateRandomList(lower=84, upper=115):
   counter = 0
   while sum(result).__le__(lower) or sum(result).__ge__(upper):
     counter += 1
-    result = wins.generateRandomNumber(5,1,39)
+    result = t5.generateRandomNumber(5,1,39)
   else:
     return result
  
@@ -145,3 +140,5 @@ while counter < 20:
     counter += 1
   else:
     continue
+
+  print(new_numbers)
