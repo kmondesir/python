@@ -71,17 +71,13 @@ class items:
       return f
 
 
-  def write(self, value, item):
+  def write(self, value, item=dt.datetime.now().strftime("%m-%d-%YT%H:%M:%S")):
     # opens a file and writes to it
-    now = dt.datetime.now()
-    self.item = item
-    if item == None:
-      # https://www.programiz.com/python-programming/datetime/strftime
-      self.item = now.strftime("%m/%d/%YT%H:%M:%S")
-    elif os.path.exists(item):
+    
+    if os.path.exists(item):
       print("File already exist, please use the append method")
     else:
-      pass
+      self.item = item
     
     try:
       f = open(self.item, 'w+')
