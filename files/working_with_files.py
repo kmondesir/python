@@ -4,6 +4,7 @@
 from contextlib import contextmanager
 import sys
 import os
+import datetime as dt
 
 import logging as log
 severity = {
@@ -51,6 +52,7 @@ class items:
     except Exception as e:
       logger.warning(e)
     else:
+      # changes the current directory
       os.chdir(self.path)
 
 
@@ -71,7 +73,16 @@ class items:
 
   def write(self, value, item):
     # opens a file and writes to it
+    now = dt.datetime.now()
     self.item = item
+    if item == None:
+      # https://www.programiz.com/python-programming/datetime/strftime
+      self.item = now.strftime("%m/%d/%YT%H:%M:%S")
+    elif os.path.exists(item):
+      print("File already exist, please use the append method")
+    else:
+      pass
+    
     try:
       f = open(self.item, 'w+')
     except PermissionError as e:
