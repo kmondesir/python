@@ -1,6 +1,7 @@
 
 
 
+from contextlib import contextmanager
 import sys
 import os
 
@@ -38,21 +39,21 @@ class items:
   https://www.youtube.com/redirect?redir_token=tKiuOsI1ZF8oNIDLKASs2PhnbWZ8MTU3MDk5ODI1M0AxNTcwOTExODUz&q=https%3A%2F%2Fgithub.com%2FCoreyMSchafer%2Fcode_snippets%2Ftree%2Fmaster%2FPython-Context-Managers&v=-aKFBoZpiqA&event=video_description
   """
 
-  def __init__(self, path=os.getcwd(), item=os.__file__):
+  def __init__(self, path=os.getcwd()):
     # tests whether the file exists and throws an error if not
     self.path = path
-    self.item = item
-    self.fullpath = os.path.join(path, item)
     try:
-      os.path.exists(self.fullpath)
+      os.path.exists(self.path)
     except IOError as e:
       logger.warning(e)
     except Exception as e:
       logger.warning(e)
 
 
-  def read(self):
+  def read(self, item):
     # open a file and returns its contents to the caller
+    self.item = item
+    self.fullpath = os.path.join(self.path, self.item)
     try:
       f = open(self.fullpath, 'r+')
     except PermissionError as e:
@@ -65,8 +66,10 @@ class items:
       return f
 
 
-  def write(self, value):
+  def write(self, value, item):
     # opens a file and writes to it
+    self.item = item
+    self.fullpath = os.path.join(self.path, self.item)
     try:
       f = open(self.fullpath, 'w+')
     except PermissionError as e:
@@ -80,8 +83,11 @@ class items:
     finally:
       f.close()
 
-  def append(self, value):
-      # opens a file and appends data to it
+
+  def append(self, value, item):
+    # opens a file and appends data to it
+    self.item = item
+    self.fullpath = os.path.join(self.path, self.item)
     try:
       f = open(self.fullpath, 'a+')
     except PermissionError as e:
