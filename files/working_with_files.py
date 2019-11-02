@@ -31,12 +31,14 @@ logger.addHandler(stream_handler)
 class items:
 
   """
-  Opens a file for reading from or writing to
+  Opens a file for reading, writing and updating
 
   The code references a video 'Python Tutorial: Context Managers - Efficiently Managing Resources' 
   created by Corey Schafer and is part of a video series
 
   https://www.youtube.com/redirect?redir_token=tKiuOsI1ZF8oNIDLKASs2PhnbWZ8MTU3MDk5ODI1M0AxNTcwOTExODUz&q=https%3A%2F%2Fgithub.com%2FCoreyMSchafer%2Fcode_snippets%2Ftree%2Fmaster%2FPython-Context-Managers&v=-aKFBoZpiqA&event=video_description
+  
+  https://www.daniweb.com/programming/software-development/threads/191670/saving-to-creating-a-new-folder 
   """
 
   def __init__(self, path=os.getcwd()):
