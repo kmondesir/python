@@ -48,14 +48,15 @@ class items:
       logger.warning(e)
     except Exception as e:
       logger.warning(e)
+    else:
+      os.chdir(self.path)
 
 
   def read(self, item):
     # open a file and returns its contents to the caller
     self.item = item
-    self.fullpath = os.path.join(self.path, self.item)
     try:
-      f = open(self.fullpath, 'r+')
+      f = open(self.item, 'r+')
     except PermissionError as e:
       logger.warning(e)
     except IOError as e:
@@ -69,9 +70,8 @@ class items:
   def write(self, value, item):
     # opens a file and writes to it
     self.item = item
-    self.fullpath = os.path.join(self.path, self.item)
     try:
-      f = open(self.fullpath, 'w+')
+      f = open(self.item, 'w+')
     except PermissionError as e:
       logger.warning(e)
     except IOError as e:
@@ -87,9 +87,8 @@ class items:
   def append(self, value, item):
     # opens a file and appends data to it
     self.item = item
-    self.fullpath = os.path.join(self.path, self.item)
     try:
-      f = open(self.fullpath, 'a+')
+      f = open(self.item, 'a+')
     except PermissionError as e:
       logger.warning(e)
     except IOError as e:
