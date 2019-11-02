@@ -17,7 +17,7 @@ severity = {
 logger = log.getLogger(__name__)
 formatter = log.Formatter('timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
-file_handler = log.FileHandler(__file__)
+file_handler = log.FileHandler(os.path.splitext(__file__)[0] + "." + "log")
 file_handler.setLevel(severity['INFO'])
 file_handler.setFormatter(formatter)
 
@@ -44,7 +44,6 @@ df = pd.read_csv(ABS_PATH, usecols=columns)
 # items = service.entities['Draw Date']
 
 # query = service.query(items)
-
 
 
 global numbers
