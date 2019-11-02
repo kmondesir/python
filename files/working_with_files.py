@@ -71,7 +71,7 @@ class items:
       return f
 
 
-  def write(self, value, item=dt.datetime.now().strftime("%m-%d-%YaT%H:%M:%S").join(".","bak")):
+  def write(self, value, item=(dt.datetime.now().strftime("D%m-%d-%YT%H:%M:%S")) + "." + "tmp"):
     # opens a file and writes to it
     
     if os.path.exists(item):
