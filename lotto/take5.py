@@ -15,7 +15,7 @@ severity = {
             'DEBUG': 10,
             'NOTSET': 0,
 }
-thisfile = __file__
+
 logger = log.getLogger(__name__)
 formatter = log.Formatter('timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
