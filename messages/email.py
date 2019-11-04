@@ -34,7 +34,7 @@ stream_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
-class send_email:
+class emails:
 
   """
   Opens a file for reading, writing and updating
@@ -47,39 +47,40 @@ class send_email:
   https://www.daniweb.com/programming/software-development/threads/191670/saving-to-creating-a-new-folder 
   """
 
-  def __init__(self, sender, receiver, server='smtp.gmail.com', port=587):
+  def __init__(self, username, password=None, server='smtp.gmail.com', port=587):
     # https://realpython.com/python-send-email/
-    self.sender = sender
-    self.receiver = receiver
+    self.username = username
+    self.password = password
     self.server = server
     self.port = port
     
-    
     try:
-      context = ssl.create_default_context() 
-      server = smtplib.SMTP(self.server,self.port)
-      server.starttls(context=context)
-      
+      self.mail = smtplib.SMTP(self.server, self.port)
+      self.mail.starttls()
+      self.mail.login(self.username, self.password)      
     except Exception as e:
       logger.error(e)
     else:
       pass
 
-  def send(self, subject='Default message sent at {}'.format(dt.datetime.now()), message=None):
+  def send(self, receiver, sender=None, subject='Default message sent at {}'.format(dt.datetime.now()), message=None):
+    
+    self.receiver = receiver
+    self.sender = sender
     self.subject = subject
     self.message = message
 
-    msg = MIMEMultipart("alternative")
-    msg["Subject"] = self.subject
-    msg["From"] = self.sender
-    msg["To"] = self.receiver
-
     try:
-      pass
+      msg = MIMEMultipart("alternative")
+   
+      msg["To"] = self.receiver
+      msg["From"] = self.sender
+      msg["Subject"] = self.subject
+      # add in the message body
+      msg.attach(MIMEText(self.message, 'plain'))
     except Exception as e:
       logger.error(e)
     else:
-      # Create secure connection with server and send email
-      context = ssl.create_default_context()
+      self.mail.send_message(msg)
     finally:
-      pass
+      del msg
