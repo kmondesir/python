@@ -63,19 +63,26 @@ class emails:
     else:
       pass
 
-  def send(self, receiver, sender=None, subject='Default message sent at {}'.format(dt.datetime.now()), message=None):
+  def send(self, receiver, sender=None, carbon_copy=None, blind_carbon_copy=None, subject='Default message sent at {}'.format(dt.datetime.now()), message=None):
     
     self.receiver = receiver
     self.sender = sender
+    self.carbon_copy = carbon_copy
+    self.blind_carbon_copy = blind_carbon_copy
     self.subject = subject
     self.message = message
 
     try:
       msg = MIMEMultipart("alternative")
-   
+      if self.carbon_copy:
+        msg["Cc"] = self.carbon_copy
+      elif self.blind_carbon_copy:
+        msg["Bcc"] = self.blind_carbon_copy
+      # sets up message variables
       msg["To"] = self.receiver
       msg["From"] = self.sender
       msg["Subject"] = self.subject
+      
       # add in the message body
       msg.attach(MIMEText(self.message, 'plain'))
     except Exception as e:
