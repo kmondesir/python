@@ -5,6 +5,8 @@ import sys
 import os
 import datetime as dt
 import smtplib, ssl, email
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 # Create a secure SSL context
 context = ssl.create_default_context()
@@ -45,26 +47,39 @@ class send_email:
   https://www.daniweb.com/programming/software-development/threads/191670/saving-to-creating-a-new-folder 
   """
 
-  def __init__(self, sender, receiver, smtp='smtp.gmail.com', port=587):
+  def __init__(self, sender, receiver, server='smtp.gmail.com', port=587):
     # https://realpython.com/python-send-email/
     self.sender = sender
     self.receiver = receiver
-    self.smtp = smtp
+    self.server = server
     self.port = port
     
     
     try:
       context = ssl.create_default_context() 
-      server = smtplib.SMTP(self.smtp,smtp.port)
+      server = smtplib.SMTP(self.server,self.port)
       server.starttls(context=context)
       
     except Exception as e:
       logger.error(e)
     else:
       pass
-    finally:
-      pass
 
   def send(self, subject='Default message sent at {}'.format(dt.datetime.now()), message=None):
-    server.login(self.sender, self.password)
+    self.subject = subject
     self.message = message
+
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = self.subject
+    msg["From"] = self.sender
+    msg["To"] = self.receiver
+
+    try:
+      pass
+    except Exception as e:
+      logger.error(e)
+    else:
+      # Create secure connection with server and send email
+      context = ssl.create_default_context()
+    finally:
+      pass
