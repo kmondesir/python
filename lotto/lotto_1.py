@@ -144,9 +144,5 @@ while counter < 50:
     counter += 1
   else:
     continue
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> 366ff7230af389ffcbb9a725810da9de94e46def
-  print(new_numbers)
+print(new_numbers)
