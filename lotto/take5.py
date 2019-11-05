@@ -15,11 +15,11 @@ severity = {
             'DEBUG': 10,
             'NOTSET': 0,
 }
-thisfile = __file__
+
 logger = log.getLogger(__name__)
 formatter = log.Formatter('timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
-file_handler = log.FileHandler('take5.log')
+file_handler = log.FileHandler(os.path.splitext(__file__)[0] + "." + "log")
 file_handler.setLevel(severity["INFO"])
 file_handler.setFormatter(formatter)
 

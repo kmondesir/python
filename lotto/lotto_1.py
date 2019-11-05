@@ -1,6 +1,5 @@
 
 import pandas as pd
-
 import os
 
 from lottery import lotto as t5
@@ -18,8 +17,13 @@ severity = {
 logger = log.getLogger(__name__)
 formatter = log.Formatter('timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
+<<<<<<< HEAD
 file_handler = log.FileHandler("lotto_1.log")
 file_handler.setLevel(severity["INFO"])
+=======
+file_handler = log.FileHandler(os.path.splitext(__file__)[0] + "." + "log")
+file_handler.setLevel(severity['INFO'])
+>>>>>>> 366ff7230af389ffcbb9a725810da9de94e46def
 file_handler.setFormatter(formatter)
 
 stream_handler = log.StreamHandler()
@@ -27,6 +31,9 @@ stream_handler.setFormatter(formatter)
 
 logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
+
+# url = 'https://data.ny.gov/api/odata/v4/dg63-4siq'
+# service = od(url, reflect_entities=True)
 
 path = os.getcwd()
 print(path)
@@ -39,6 +46,10 @@ print(ABS_PATH)
 columns = ['Draw Date', 'Winning Numbers']
 
 df = pd.read_csv(ABS_PATH, usecols=columns)
+# items = service.entities['Draw Date']
+
+# query = service.query(items)
+
 
 global numbers
 
@@ -133,5 +144,9 @@ while counter < 50:
     counter += 1
   else:
     continue
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 366ff7230af389ffcbb9a725810da9de94e46def
   print(new_numbers)

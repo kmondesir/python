@@ -3,6 +3,7 @@
 
 import logging as log
 import calendar as cal
+import os
 from datetime import date, timedelta
 
 severity = {
@@ -17,7 +18,7 @@ severity = {
 logger = log.getLogger(__name__)
 formatter = log.Formatter('timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
-file_handler = log.FileHandler('calculatedates.log')
+file_handler = log.FileHandler(os.path.splitext(__file__)[0] + "." + "log")
 file_handler.setLevel(severity['INFO'])
 file_handler.setFormatter(formatter)
 

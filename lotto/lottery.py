@@ -21,7 +21,7 @@ thisfile = __file__
 logger = log.getLogger(__name__)
 formatter = log.Formatter('timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
-file_handler = log.FileHandler('lottery.log')
+file_handler = log.FileHandler(os.path.splitext(__file__)[0] + "." + "log")
 file_handler.setLevel(severity['INFO'])
 file_handler.setFormatter(formatter)
 
@@ -36,7 +36,7 @@ class lotto:
 
   https://stackoverflow.com/questions/12906402/type-object-datetime-datetime-has-no-attribute-datetime
   """
-  def __init__(self, draw_numbers, draw_date=dt.today()):
+  def __init__(self, draw_numbers='6,11,21,32,34', draw_date=dt.today()):
   
     try:  
       self.draw_numbers = list(map(int, draw_numbers.split()))
