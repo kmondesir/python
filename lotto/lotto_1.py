@@ -17,13 +17,8 @@ severity = {
 logger = log.getLogger(__name__)
 formatter = log.Formatter('timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
-<<<<<<< HEAD
-file_handler = log.FileHandler("lotto_1.log")
-file_handler.setLevel(severity["INFO"])
-=======
 file_handler = log.FileHandler(os.path.splitext(__file__)[0] + "." + "log")
 file_handler.setLevel(severity['INFO'])
->>>>>>> 366ff7230af389ffcbb9a725810da9de94e46def
 file_handler.setFormatter(formatter)
 
 stream_handler = log.StreamHandler()
