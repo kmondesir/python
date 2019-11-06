@@ -47,7 +47,11 @@ class items:
     self.path = path
     try:
       os.path.exists(self.path)
-    except IOError as e:
+	except PermissionError as e:
+      logger.warning(e)
+	except FileNotFoundError as e:
+      logger.warning(e)
+    except OSError as e:
       logger.warning(e)
     except Exception as e:
       logger.warning(e)
@@ -63,7 +67,9 @@ class items:
       f = open(self.item, 'r+')
     except PermissionError as e:
       logger.warning(e)
-    except IOError as e:
+    except FileNotFoundError as e:
+      logger.warning(e)
+    except OSError as e:
       logger.warning(e)
     except Exception as e:
       logger.warning(e)
@@ -76,6 +82,7 @@ class items:
     
     if os.path.exists(item):
       print("File already exist, please use the append method")
+      raise FileExistsError
     else:
       self.item = item
     
@@ -83,7 +90,9 @@ class items:
       f = open(self.item, 'w+')
     except PermissionError as e:
       logger.warning(e)
-    except IOError as e:
+	except FileExistsError as e:
+		logger.warning(e)
+    except OSError as e:
       logger.warning(e)
     except Exception as e:
       logger.warning(e)
@@ -93,14 +102,16 @@ class items:
       f.close()
 
 
-  def append(self, value, item):
+  def append(self, item, value="This line was generated at" + " " + dt.datetime.now().strftime("D%m-%d-%YT%H:%M:%S") + "\n"):
     # opens a file and appends data to it
     self.item = item
     try:
       f = open(self.item, 'a+')
     except PermissionError as e:
       logger.warning(e)
-    except IOError as e:
+	except FileNotFoundError as e:
+      logger.warning(e)
+    except OSError as e:
       logger.warning(e)
     except Exception as e:
       logger.warning(e)
