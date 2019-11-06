@@ -1,4 +1,4 @@
-import working_with_files as wf
+from . import items
 
 
 this_file = wf.items()
