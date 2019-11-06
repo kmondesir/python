@@ -64,7 +64,7 @@ class emails:
       pass
 
   def send(self, receiver, sender=None, carbon_copy=None, blind_carbon_copy=None, subject='Default message sent at {}'.format(dt.datetime.now()), message=None):
-    
+    # https://www.tutorialspoint.com/python/python_sending_email.htm
     self.receiver = receiver
     self.sender = sender
     self.carbon_copy = carbon_copy
@@ -76,8 +76,10 @@ class emails:
       msg = MIMEMultipart("alternative")
       if self.carbon_copy:
         msg["Cc"] = self.carbon_copy
-      elif self.blind_carbon_copy:
+        
+      if self.blind_carbon_copy:
         msg["Bcc"] = self.blind_carbon_copy
+        
       # sets up message variables
       msg["To"] = self.receiver
       msg["From"] = self.sender
@@ -90,4 +92,5 @@ class emails:
     else:
       self.mail.send_message(msg)
     finally:
-      del msg
+      self.mail = None 
+      msg = None

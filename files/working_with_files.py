@@ -47,9 +47,9 @@ class items:
     self.path = path
     try:
       os.path.exists(self.path)
-	except PermissionError as e:
+	  except PermissionError as e:
       logger.warning(e)
-	except FileNotFoundError as e:
+	  except FileNotFoundError as e:
       logger.warning(e)
     except OSError as e:
       logger.warning(e)
@@ -90,8 +90,8 @@ class items:
       f = open(self.item, 'w+')
     except PermissionError as e:
       logger.warning(e)
-	except FileExistsError as e:
-		logger.warning(e)
+	  except FileExistsError as e:
+		  logger.warning(e)
     except OSError as e:
       logger.warning(e)
     except Exception as e:
@@ -109,7 +109,7 @@ class items:
       f = open(self.item, 'a+')
     except PermissionError as e:
       logger.warning(e)
-	except FileNotFoundError as e:
+	  except FileNotFoundError as e:
       logger.warning(e)
     except OSError as e:
       logger.warning(e)
