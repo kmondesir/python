@@ -49,10 +49,10 @@ class emails:
   https://www.daniweb.com/programming/software-development/threads/191670/saving-to-creating-a-new-folder 
   """
 
-  def __init__(self, username, password=None, server='smtp.gmail.com', port=587):
+  def __init__(self, username, server='smtp.gmail.com', port=587):
     # https://realpython.com/python-send-email/
     self.username = username
-    self.password = password
+    self.password = input("Please enter your password: ")
     self.server = server
     self.port = port
     
@@ -72,7 +72,7 @@ class emails:
     self.carbon_copy = carbon_copy
     self.blind_carbon_copy = blind_carbon_copy
     
-  def message(self, subject='Default message sent at {}'.format(dt.datetime.now()), message=None):
+  def body(self, subject='Default message sent at {}'.format(dt.datetime.now()), message=None):
     self.subject = subject
     self.message = message
 
@@ -96,4 +96,4 @@ class emails:
     else:
       self.mail.send_message(msg)
     finally:
-      del msg
+      self.mail.quit()
