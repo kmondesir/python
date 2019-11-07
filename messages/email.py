@@ -36,7 +36,7 @@ stream_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 
-class emails:
+class mail:
 
   """
   Opens a file for reading, writing and updating
