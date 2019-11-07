@@ -1,7 +1,7 @@
-from email import mail
+from .email import emails
 
 
 
-message = mail('kino.mondesir@gmail.com')
+message = emails('kino.mondesir@gmail.com')
 message.receivers('morel.kevin@gmail.com')
 message.send()
