@@ -65,7 +65,18 @@ class emails:
     else:
       pass
 
-  def send(self, receiver, sender=None, carbon_copy=None, blind_carbon_copy=None, subject='Default message sent at {}'.format(dt.datetime.now()), message=None):
+  def sender(self, sender=self.username):
+    self.sender = sender
+
+  def receivers(self, receiver=self.username, carbon_copy=None, blind_carbon_copy=None):
+    self.carbon_copy = carbon_copy
+    self.blind_carbon_copy = blind_carbon_copy
+    
+  def message(self, subject='Default message sent at {}'.format(dt.datetime.now()), message=None):
+    self.subject = subject
+    self.message = message
+
+  def send(self):
     
     self.receiver = receiver
     self.sender = sender
