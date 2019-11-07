@@ -1,5 +1,7 @@
+# https://www.geeksforgeeks.org/unit-testing-python-unittest/
 import unittest
-from lottery import lotto
+# https://realpython.com/absolute-vs-relative-python-imports/#syntax-of-import-statements
+from .lottery import lotto
 
 class test_lotto(unittest.TestCase):
 
