@@ -78,13 +78,6 @@ class emails:
 
   def send(self):
     
-    self.receiver = receiver
-    self.sender = sender
-    self.carbon_copy = carbon_copy
-    self.blind_carbon_copy = blind_carbon_copy
-    self.subject = subject
-    self.message = message
-
     try:
       msg = MIMEMultipart("alternative")
       if self.carbon_copy:
