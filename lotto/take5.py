@@ -4,7 +4,7 @@ import requests
 import datetime as dt
 import os
 
-from lottery import lotto as take5
+from .lottery import lotto as take5
 
 import logging as log
 severity = {
