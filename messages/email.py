@@ -72,9 +72,9 @@ class emails:
     self.carbon_copy = carbon_copy
     self.blind_carbon_copy = blind_carbon_copy
     
-  def body(self, subject='Default message sent at {}'.format(dt.datetime.now()), message=None):
+  def message(self, subject='Default message sent at {}'.format(dt.datetime.now()), body=None):
     self.subject = subject
-    self.message = message
+    self.body = body
 
   def send(self):
     
@@ -90,7 +90,7 @@ class emails:
       msg["Subject"] = self.subject
       
       # add in the message body
-      msg.attach(MIMEText(self.message, 'plain'))
+      msg.attach(MIMEText(self.body, 'plain'))
     except Exception as e:
       logger.error(e)
     else:
