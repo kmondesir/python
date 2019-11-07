@@ -39,8 +39,14 @@ logger.addHandler(stream_handler)
 class emails:
 
   """
-  Creates a Python object for sending emails
+  Creates a Python object for sending emails using the following syntax your_message = email('your_email_address','mail_server','port_number')
+  to create the object and use the following functions to build the object:
 
+    your_message.receivers('receipient')
+    your_message.message('The subject','and Body')
+    your_message.send
+
+  The syntax is broken into multiple parts making it more verbose but easier to read
 
   """
 

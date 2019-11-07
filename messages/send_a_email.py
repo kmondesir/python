@@ -1,4 +1,4 @@
-from .email import emails
+from email import emails
 
 
 
