@@ -66,25 +66,46 @@ class emails:
       pass
 
   def sender(self, sender):
+    # Adds from field to the object
     self.sender = sender
 
   def receivers(self, receiver, carbon_copy=None, blind_carbon_copy=None):
+    # Adds a to, cc, and bcc attributes to the email object
+    if type(receiver) == list:
+      self.receiver = map(lambda x: x.splitext(';'), receiver)
+    else:
+      self.receiver = receiver
+      
     self.carbon_copy = carbon_copy
     self.blind_carbon_copy = blind_carbon_copy
     
   def message(self, subject='Default message sent at {}'.format(dt.datetime.now()), body=None):
+    # Add subject and body to the email object
     self.subject = subject
     self.body = body
 
-  def send(self):
-    
+  def send(self, files=None):
+    # Send the email object once sender, receivers and message have been executed
     try:
       msg = MIMEMultipart("alternative")
-      if self.carbon_copy:
-        msg["Cc"] = self.carbon_copy
+      if self.carbon_copy is not None:
+        if type(self.carbon_copy) == list:
+          msg["Cc"] = map(lambda x: x.splitext(';'), self.carbon_copy)
+        else:
+          msg["Cc"] = self.carbon_copy
         
-      if self.blind_carbon_copy:
-        msg["Bcc"] = self.blind_carbon_copy
+      if self.blind_carbon_copy is not None:
+        if type(self.blind_carbon_copy) == list:
+          msg["Bcc"] = map(lambda x: x.splitext(';'), self.carbon_copy)
+        else:
+          msg["Bcc"] = self.blind_carbon_copy
+
+      if self.files is not None:
+        for file in files:
+          with open(file, 'rb') as f:
+            file_data = f.read()
+            file_name = os.path.basename(file)
+            msg.add_attachment(file_data, maintype='application', subtype='octet-stream', filename=file_name)
         
       # sets up message variables
       msg["To"] = self.receiver
