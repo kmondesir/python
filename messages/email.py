@@ -65,10 +65,10 @@ class emails:
     else:
       pass
 
-  def sender(self, sender=self.username):
+  def sender(self, sender):
     self.sender = sender
 
-  def receivers(self, receiver=self.username, carbon_copy=None, blind_carbon_copy=None):
+  def receivers(self, receiver, carbon_copy=None, blind_carbon_copy=None):
     self.carbon_copy = carbon_copy
     self.blind_carbon_copy = blind_carbon_copy
     
