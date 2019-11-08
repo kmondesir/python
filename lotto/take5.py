@@ -4,7 +4,7 @@ import requests
 import datetime as dt
 import os
 
-from lottery import lotto as take5
+from .lottery import lotto as take5
 
 import logging as log
 severity = {
@@ -19,7 +19,9 @@ severity = {
 logger = log.getLogger(__name__)
 formatter = log.Formatter('timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
-file_handler = log.FileHandler(os.path.splitext(__file__)[0] + "." + "log")
+filename = os.path.splitext(__file__)[0]
+extension = "log"
+file_handler = log.FileHandler(filename + "." + extension)
 file_handler.setLevel(severity["INFO"])
 file_handler.setFormatter(formatter)
 

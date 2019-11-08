@@ -24,7 +24,9 @@ severity = {
 logger = log.getLogger(__name__)
 formatter = log.Formatter('timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
-file_handler = log.FileHandler(os.path.splitext(__file__)[0] + "." + "log")
+filename = os.path.splitext(__file__)[0]
+extension = "log"
+file_handler = log.FileHandler(filename + "." + extension)
 file_handler.setLevel(severity["INFO"])
 file_handler.setFormatter(formatter)
 
@@ -39,18 +41,18 @@ class emails:
   """
   Creates a email 
 
-  The code references a video 'Python Tutorial: Context Managers - Efficiently Managing Resources' 
-  created by Corey Schafer and is part of a video series
+    your_message.receivers('receipient')
+    your_message.message('The subject','and Body')
+    your_message.send
 
-  https://www.youtube.com/redirect?redir_token=tKiuOsI1ZF8oNIDLKASs2PhnbWZ8MTU3MDk5ODI1M0AxNTcwOTExODUz&q=https%3A%2F%2Fgithub.com%2FCoreyMSchafer%2Fcode_snippets%2Ftree%2Fmaster%2FPython-Context-Managers&v=-aKFBoZpiqA&event=video_description
-  
-  https://www.daniweb.com/programming/software-development/threads/191670/saving-to-creating-a-new-folder 
+  The syntax is broken into multiple parts making it more verbose but easier to read
+
   """
 
-  def __init__(self, username, password=None, server='smtp.gmail.com', port=587):
+  def __init__(self, username, server='smtp.gmail.com', port=587):
     # https://realpython.com/python-send-email/
     self.username = username
-    self.password = password
+    self.password = input("Please enter your password: ")
     self.server = server
     self.port = port
     
@@ -63,15 +65,19 @@ class emails:
     else:
       pass
 
-  def send(self, receiver, sender=None, carbon_copy=None, blind_carbon_copy=None, subject='Default message sent at {}'.format(dt.datetime.now()), message=None):
-    # https://www.tutorialspoint.com/python/python_sending_email.htm
-    self.receiver = receiver
+  def sender(self, sender=self.username):
     self.sender = sender
+
+  def receivers(self, receiver=self.username, carbon_copy=None, blind_carbon_copy=None):
     self.carbon_copy = carbon_copy
     self.blind_carbon_copy = blind_carbon_copy
+    
+  def message(self, subject='Default message sent at {}'.format(dt.datetime.now()), body=None):
     self.subject = subject
-    self.message = message
+    self.body = body
 
+  def send(self):
+    
     try:
       msg = MIMEMultipart("alternative")
       if self.carbon_copy:
@@ -86,11 +92,10 @@ class emails:
       msg["Subject"] = self.subject
       
       # add in the message body
-      msg.attach(MIMEText(self.message, 'plain'))
+      msg.attach(MIMEText(self.body, 'plain'))
     except Exception as e:
       logger.error(e)
     else:
       self.mail.send_message(msg)
     finally:
-      self.mail = None 
-      msg = None
+      self.mail.quit()
