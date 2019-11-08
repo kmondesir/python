@@ -45,11 +45,11 @@ class connections:
 
   drivers = {
       'MS_ACCESS': 'Microsoft Access Driver (*.mdb, *.accdb)',
-              'MS_SQL': 'SQL Server',
-              'MY_SQL': 'MySQL ODBC 3.51 Driver',
-              'ORACLE': 'Oracle in OraClient11g_home1',
-              'MARIADB': 'MariaDB Connector/C 3.1',
-              'POSTGRESQL': 'PostgreSQL Unicode'
+      'MS_SQL': 'SQL Server',
+      'MY_SQL': 'MySQL ODBC 3.51 Driver',
+      'ORACLE': 'Oracle in OraClient11g_home1',
+      'MARIADB': 'MariaDB Connector/C 3.1',
+      'POSTGRESQL': 'PostgreSQL Unicode'
   }
 
   def __init__(self, driver=drivers['MS_SQL'], server='127.0.0.1', trusted='yes'):
