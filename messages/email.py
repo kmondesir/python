@@ -39,8 +39,7 @@ logger.addHandler(stream_handler)
 class emails:
 
   """
-  Creates a Python object for sending emails using the following syntax your_message = email('your_email_address','mail_server','port_number')
-  to create the object and use the following functions to build the object:
+  Creates a email 
 
     your_message.receivers('receipient')
     your_message.message('The subject','and Body')
@@ -66,10 +65,10 @@ class emails:
     else:
       pass
 
-  def sender(self, sender=self.username):
+  def sender(self, sender):
     self.sender = sender
 
-  def receivers(self, receiver=self.username, carbon_copy=None, blind_carbon_copy=None):
+  def receivers(self, receiver, carbon_copy=None, blind_carbon_copy=None):
     self.carbon_copy = carbon_copy
     self.blind_carbon_copy = blind_carbon_copy
     
@@ -83,8 +82,10 @@ class emails:
       msg = MIMEMultipart("alternative")
       if self.carbon_copy:
         msg["Cc"] = self.carbon_copy
-      elif self.blind_carbon_copy:
+        
+      if self.blind_carbon_copy:
         msg["Bcc"] = self.blind_carbon_copy
+        
       # sets up message variables
       msg["To"] = self.receiver
       msg["From"] = self.sender
