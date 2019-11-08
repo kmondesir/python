@@ -37,7 +37,7 @@ logger.addHandler(stream_handler)
 class emails:
 
   """
-  Opens a file for reading, writing and updating
+  Creates a email 
 
   The code references a video 'Python Tutorial: Context Managers - Efficiently Managing Resources' 
   created by Corey Schafer and is part of a video series
