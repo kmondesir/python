@@ -7,6 +7,7 @@ import datetime as dt
 import smtplib, ssl, email
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email import encoders
 
 # Create a secure SSL context
 context = ssl.create_default_context()
@@ -57,25 +58,22 @@ class emails:
     self.port = port
     
     try:
-      self.mail = smtplib.SMTP(self.server, self.port)
-      self.mail.starttls()
-      self.mail.login(self.username, self.password)      
+      self.mail = smtplib.SMTP(server, port)
     except Exception as e:
       logger.error(e)
     else:
-      pass
+      self.mail.login(self.username, self.password)
 
-  def sender(self, sender):
+  def senders(self, sender=None):
     # Adds from field to the object
-    self.sender = sender
+    if sender is None:
+      self.sender = self.username
+    else:
+      self.sender = sender
 
   def receivers(self, receiver, carbon_copy=None, blind_carbon_copy=None):
-    # Adds a to, cc, and bcc attributes to the email object
-    if type(receiver) == list:
-      self.receiver = map(lambda x: x.splitext(';'), receiver)
-    else:
-      self.receiver = receiver
-      
+    # Adds a to, cc, and bcc attributes to the email object   
+    self.receiver = receiver   
     self.carbon_copy = carbon_copy
     self.blind_carbon_copy = blind_carbon_copy
     
@@ -87,20 +85,15 @@ class emails:
   def send(self, files=None):
     # Send the email object once sender, receivers and message have been executed
     try:
+      self.files = files
       msg = MIMEMultipart("alternative")
+      
       if self.carbon_copy is not None:
         msg["Cc"] = self.carbon_copy
         
       if self.blind_carbon_copy is not None:
         msg["Bcc"] = self.blind_carbon_copy
 
-      if self.files is not None:
-        for file in files:
-          with open(file, 'rb') as f:
-            file_data = f.read()
-            file_name = os.path.basename(file)
-            msg.add_attachment(file_data, maintype='application', subtype='octet-stream', filename=file_name)
-        
       # sets up message variables
       msg["To"] = self.receiver
       msg["From"] = self.sender
@@ -111,6 +104,6 @@ class emails:
     except Exception as e:
       logger.error(e)
     else:
-      self.mail.send_message(msg)
+      self.mail.send_message(msg, self.senders)
     finally:
       self.mail.quit()
