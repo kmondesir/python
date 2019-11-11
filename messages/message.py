@@ -89,16 +89,10 @@ class emails:
     try:
       msg = MIMEMultipart("alternative")
       if self.carbon_copy is not None:
-        if type(self.carbon_copy) == list:
-          msg["Cc"] = map(lambda x: x.splitext(';'), self.carbon_copy)
-        else:
-          msg["Cc"] = self.carbon_copy
+        msg["Cc"] = self.carbon_copy
         
       if self.blind_carbon_copy is not None:
-        if type(self.blind_carbon_copy) == list:
-          msg["Bcc"] = map(lambda x: x.splitext(';'), self.carbon_copy)
-        else:
-          msg["Bcc"] = self.blind_carbon_copy
+        msg["Bcc"] = self.blind_carbon_copy
 
       if self.files is not None:
         for file in files:

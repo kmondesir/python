@@ -1,5 +1,4 @@
-from email import emails
-
+from .message import emails
 
 
 message = emails('kino.mondesir@gmail.com')
