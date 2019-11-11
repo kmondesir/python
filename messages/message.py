@@ -8,6 +8,7 @@ import smtplib, ssl, email
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email import encoders
+from getpass import getpass
 
 # Create a secure SSL context
 context = ssl.create_default_context()
@@ -53,7 +54,8 @@ class emails:
   def __init__(self, username, server='smtp.gmail.com', port=587):
     # https://realpython.com/python-send-email/
     self.username = username
-    self.password = input("Please enter your password: ")
+    # https://stackoverflow.com/questions/9202224/getting-command-line-password-input-in-python
+    self.password = getpass()
     self.server = server
     self.port = port
     
