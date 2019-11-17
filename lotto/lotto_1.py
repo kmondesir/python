@@ -134,7 +134,7 @@ new_numbers = list()
 global counter
 counter = 0
 
-while counter < 50:
+while counter < 25:
   result = generateRandomList() 
   if result not in list(df['Winning Numbers']):
     new_numbers.append(result)
