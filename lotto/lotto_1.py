@@ -17,7 +17,9 @@ severity = {
 logger = log.getLogger(__name__)
 formatter = log.Formatter('timestamp:%(asctime)s module:%(name)s message:%(message)s')
 
-file_handler = log.FileHandler(os.path.splitext(__file__)[0] + "." + "log")
+file_name = os.path.splitext(__file__)[0]
+file_ext = "log"
+file_handler = log.FileHandler( file_name + "." + file_ext )
 file_handler.setLevel(severity['INFO'])
 file_handler.setFormatter(formatter)
 
